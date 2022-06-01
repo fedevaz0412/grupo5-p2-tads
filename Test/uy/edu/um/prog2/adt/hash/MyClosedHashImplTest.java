@@ -1,6 +1,8 @@
 package uy.edu.um.prog2.adt.hash;
 
 import org.junit.jupiter.api.Test;
+import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
+import uy.edu.um.prog2.adt.hash.exceptions.UnavailableIndex;
 
 import static org.junit.jupiter.api.Assertions.*;
 

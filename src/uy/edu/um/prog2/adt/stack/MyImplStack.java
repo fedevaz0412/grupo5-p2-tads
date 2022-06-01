@@ -1,6 +1,7 @@
 package uy.edu.um.prog2.adt.stack;
 
 import uy.edu.um.prog2.adt.linkedlist.Node;
+import uy.edu.um.prog2.adt.stack.exceptions.EmptyStackException;
 
 public class MyImplStack<T> implements MyStack<T>{
     private Node<T> top = null;

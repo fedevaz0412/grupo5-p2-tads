@@ -1,8 +1,7 @@
 package uy.edu.um.prog2.adt.queue;
 
 import org.junit.jupiter.api.Test;
-import uy.edu.um.prog2.adt.linkedlist.MyLinkedListImpl;
-import uy.edu.um.prog2.adt.linkedlist.MyList;
+import uy.edu.um.prog2.adt.queue.exceptions.EmptyQueueException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

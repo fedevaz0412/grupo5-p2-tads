@@ -1,6 +1,7 @@
 package uy.edu.um.prog2.adt.queue;
 
 import uy.edu.um.prog2.adt.linkedlist.Node;
+import uy.edu.um.prog2.adt.queue.exceptions.EmptyQueueException;
 
 public class MyImplQueue<T> implements MyQueue<T>{
     private Node<T> rear = null, front = null;

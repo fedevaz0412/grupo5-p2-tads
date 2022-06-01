@@ -1,6 +1,6 @@
 package uy.edu.um.prog2.adt.heap;
 
-import uy.edu.um.prog2.adt.BinarySearchTree.TreeNode;
+import uy.edu.um.prog2.adt.heap.exceptions.EmptyHeapException;
 
 public class MyHeapImpl<T extends Comparable<T>> implements MyHeap<T>{
     private T[] values;

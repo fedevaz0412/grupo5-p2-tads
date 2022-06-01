@@ -1,6 +1,7 @@
 package uy.edu.um.prog2.adt.heap;
 
 import org.junit.jupiter.api.Test;
+import uy.edu.um.prog2.adt.heap.exceptions.EmptyHeapException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

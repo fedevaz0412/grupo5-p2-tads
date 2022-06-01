@@ -1,5 +1,8 @@
 package uy.edu.um.prog2.adt.hash;
 
+import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
+import uy.edu.um.prog2.adt.hash.exceptions.UnavailableIndex;
+
 public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, V> {
 
     private static final int DEFAULT_INITIAL_TABLE_HASH_SIZE = 10;
