@@ -63,30 +63,30 @@ public class MyLinkedListImpl<T> implements MyList<T> {
         Node<T> prev = null;
         Node<T> current = this.head;
 
-        // Busco el elemento a eliminar teniendo en cuenta mantener una referencia al elemento anterior
+        //busco el elemento a eliminar
         while (current != null && !current.getValue().equals(value)) {
             prev = current;
             current = current.getNext();
         }
-        if (current != null) { // si encontre el elemento a eliminar
+        if (current != null) { //si encontre el elemento a eliminar
 
             if (current == this.head && current.getNext() != null) {// si es el primer valor y no el ultimo
 
                 Node<T> temp = this.head;
                 this.head = this.head.getNext(); // pongo head al segundo/siguiente
 
-                temp.setNext(null); // quito referencia del elemento eliminado al siguiente
+                temp.setNext(null); //saco referencia del elemento eliminado al siguiente
 
             } else if (current.getNext() == null && current != this.head) {// si es el ultimo valor y no el primero
 
                 prev.setNext(null);
 
-            } else if (current.getNext() == null && current == this.head) {// si es el primer valor y el ultimo (lista de un solo valor)
+            } else if (current.getNext() == null && current == this.head) {// si es el primer valor y el ultimo (lista con un valor)
 
                 this.head = null;
                 this.head.setNext(null);
 
-            } else { // resto de los casos
+            } else { //otros casos
 
                 prev.setNext(current.getNext());
                 current.setNext(null);
