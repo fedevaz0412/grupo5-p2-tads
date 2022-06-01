@@ -84,5 +84,9 @@ class MyLinkedListImplTest {
         assertEquals(3, list.size());
         assertEquals(4,list.get(0));
         assertEquals(7,list.get(1));
+        assertEquals(2,list.get(2));
+        list.removePorPos(2);
+        //assertEquals(2,list.get(2));
+        assertEquals(2, list.size());
     }
 }

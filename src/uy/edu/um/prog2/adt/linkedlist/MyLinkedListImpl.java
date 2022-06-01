@@ -99,16 +99,18 @@ public class MyLinkedListImpl<T> implements MyList<T> {
 
     @Override
     public void removePorPos(int position) {
-        Node<T> prev = this.head;
+        Node<T> prev = null;
         Node<T> current = this.head;
         int posEstoy = 0;
 
-        while (current!= null){//empieza a recorrer la lista si no es vacia
+
+        while (current!= null && current.getNext() != null){//empieza a recorrer la lista si no es vacia o si el siguiente no es vacío
             if(posEstoy == position){//si la posicion que quiero es la que estoy
                 if(posEstoy == 0){
-                    head =current.getNext();//como voy a borrar el que quiero hago el siguiente como head
+                    head = current.getNext();//como voy a borrar el que quiero hago el siguiente como head
                     current = current.getNext();//y el que voy a ver va a ser el siguiente
-                }else if (current.getNext().getNext() == null){//curretnt.next se refiere al ultimo nodo
+                }
+                else if (current.getNext().getNext() == null){//current.next se refiere al ultimo nodo
                     current.setNext(null);//elimina el ultimo nodo de la lista
                 }else{
                     prev.setNext(current.getNext());//como voy a borrar uno me tengo que saltear ese hago el prev.next igual al next del que estoy viendo
@@ -120,19 +122,6 @@ public class MyLinkedListImpl<T> implements MyList<T> {
             current = current.getNext();//hago el que quiero ver el proximo
             posEstoy++;//aumento el contador
         }
-
-//        for ( int i = 1; i <= position-2;i++){
-//            prev = prev.getNext();
-//        }
-//        for (int i = 1; i <= position;i++){
-//            current = current.getNext();
-//        }
-//        if(current == null){
-//            prev.setNext(null);
-//        }else{
-//            prev.setNext(current);
-//        }
-
     }
 
     @Override
