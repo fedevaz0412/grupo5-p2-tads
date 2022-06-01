@@ -7,7 +7,9 @@ public interface MyList<T> {
 
     boolean contains(T value);
 
-    void remove(T value);
+    void removePorValor(T value);
+
+    void removePorPos(int position);
 
     int size();
 }
