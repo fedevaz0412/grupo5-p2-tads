@@ -80,13 +80,22 @@ class MyLinkedListImplTest {
         list.add(5);
         list.add(7);
         list.add(2);
+
+        list.removePorPos(5);//pos que no existe, no hace nada
+
         list.removePorPos(1);
         assertEquals(3, list.size());
         assertEquals(4,list.get(0));
         assertEquals(7,list.get(1));
         assertEquals(2,list.get(2));
         list.removePorPos(2);
-        //assertEquals(2,list.get(2));
         assertEquals(2, list.size());
+        assertEquals(4,list.get(0));
+        assertEquals(7,list.get(1));
+        list.removePorPos(0);
+        assertEquals(1, list.size());
+        assertEquals(7,list.get(0));
+        list.removePorPos(0);
+        assertEquals(0, list.size());
     }
 }

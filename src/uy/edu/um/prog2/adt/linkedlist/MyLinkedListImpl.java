@@ -102,25 +102,26 @@ public class MyLinkedListImpl<T> implements MyList<T> {
         Node<T> prev = null;
         Node<T> current = this.head;
         int posEstoy = 0;
+        if(current != null && current.getNext() == null){//caso borde solo 1 elem en lista
+            head = null;
+        }else {
 
-
-        while (current!= null && current.getNext() != null){//empieza a recorrer la lista si no es vacia o si el siguiente no es vacío
-            if(posEstoy == position){//si la posicion que quiero es la que estoy
-                if(posEstoy == 0){
+            while (current != null && current.getNext() != null) {//empieza a recorrer la lista si no es vacia o si el siguiente no es vacío
+                if (posEstoy == position && posEstoy == 0) {
                     head = current.getNext();//como voy a borrar el que quiero hago el siguiente como head
                     current = current.getNext();//y el que voy a ver va a ser el siguiente
-                }
-                else if (current.getNext().getNext() == null){//current.next se refiere al ultimo nodo
+                } else if (posEstoy == position-1 && current.getNext().getNext() == null) {//current.next se refiere al ultimo nodo (caso borde eliminar ultimo elem)
                     current.setNext(null);//elimina el ultimo nodo de la lista
-                }else{
+                } else if (posEstoy == position) {
                     prev.setNext(current.getNext());//como voy a borrar uno me tengo que saltear ese hago el prev.next igual al next del que estoy viendo
                     current = current.getNext();//y el que voy a ver va ser el siguiente
                 }
+
+                //i no es la que estoy buscando hace:
+                prev = current;//hago el previo el que ya vi
+                current = current.getNext();//hago el que quiero ver el proximo
+                posEstoy++;//aumento el contador
             }
-            //i no es la que estoy buscando hace:
-            prev = current;//hago el previo el que ya vi
-            current = current.getNext();//hago el que quiero ver el proximo
-            posEstoy++;//aumento el contador
         }
     }
 
