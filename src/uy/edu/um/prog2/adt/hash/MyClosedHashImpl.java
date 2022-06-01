@@ -10,30 +10,24 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
     private int size;
 
 
-    //CONSTRUCTORS
     public MyClosedHashImpl() {
-        tableHash = new NodoHash[DEFAULT_INITIAL_TABLE_HASH_SIZE];
+        tableHash = new NodoHash[DEFAULT_INITIAL_TABLE_HASH_SIZE];//array de nodos de tam definido
     }
     public MyClosedHashImpl(int tableHashSize) {
         tableHash = new NodoHash[tableHashSize];
     }
 
 
-    //IMPL
 
     private int colisionIndex(int index){ //Devuelve lugar a intentar insertar, de manera cuadratica
         int temp = 0;
-
-
         temp = index^2;
-
-
         return temp;
     }
 
     private int tryCollision(K key, int intento){ // intenta insertar
         int index = (key.hashCode() + colisionIndex(intento)) % tableHash.length;
-        if(index < 0){
+        if(index < 0){//si da negativo, hacerlo positivo
             index = index*(-1);
         }
         return index;
@@ -47,8 +41,10 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
 
         NodoHash<K,V> nuevoNodo = new NodoHash<>(key,value);
 
-        //Mintras el espacio este ocupado, se mantenga dentro del rango del hash, no este el nodo borrado o que la key del nodo sea diferente intentamos de vuelta
-        while (tableHash[index] != null && !(intento > tableHash.length) && !tableHash[index].isBorrado() && !tableHash[index].getKey().equals(key)){
+        while (tableHash[index] != null && //el espacio este ocupado
+                !(intento > tableHash.length) && //esté dentro del hash
+                !tableHash[index].isBorrado() && // no este el nodo borrado ?
+                !tableHash[index].getKey().equals(key)){//key del nodo sea diferente a la que quiero poner
             intento++;
             index = tryCollision(key,intento);
         }
@@ -57,7 +53,7 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
             throw new UnavailableIndex();
         }
 
-        if(tableHash[index] == null || tableHash[index].isBorrado()){ //Si borraron un nodo o hay lugar insertamos
+        if(tableHash[index] == null || tableHash[index].isBorrado()){ //Si hay un nodo borrado o hay lugar se inserta
             tableHash[index] = nuevoNodo;
         }
         else{ //Ya existe uno y se actualiza el valor
@@ -77,18 +73,22 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
 
         int index = tryCollision(key,intento);
 
-        //Minetras no encontremos, repetimos la busqueda cuadraticamente
-        while(tableHash[index] != null && !tableHash[index].getKey().equals(key) && !(intento > tableHash.length)){
-            intento += 1;
+        while(tableHash[index] != null && //el espacio este ocupado
+                !(intento > tableHash.length) && //esté dentro del hash
+                !tableHash[index].getKey().equals(key)){//key del nodo sea diferente a la que quiero poner
+            intento += 1;//se repite la busqueda
             index = tryCollision(key,intento);
         }
 
-        //Encontramos
-        if(tableHash[index] != null &&  !(intento > tableHash.length) && tableHash[index].getKey().equals(key) && !tableHash[index].isBorrado()){
+        //encontrado
+        if(tableHash[index] != null &&  //el espacio este ocupado
+                !(intento > tableHash.length) && //esté dentro del hash
+                tableHash[index].getKey().equals(key) && //key del nodo sea igual a la que quiero poner
+                !tableHash[index].isBorrado()){//no haya uno borrado en ese index
             returnData = tableHash[index].getData();
         }
 
-        //No encontramos
+        //no encontrado
         if(intento >= tableHash.length){
             throw new KeyNotFound();
         }
@@ -97,9 +97,9 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
 
     }
 
-    public V getPosition(int index){
+    public V getPosition(int index){//getData ? es necesario?
         V dataReturn = null;
-        if(tableHash[index] != null && !tableHash[index].isBorrado()){
+        if(tableHash[index] != null && !tableHash[index].isBorrado()){//si no esta vacio ni borrado
             dataReturn = tableHash[index].getData();
         }
         return dataReturn;
@@ -110,21 +110,26 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
         int intento = 0;
         int index = tryCollision(key,intento);
 
-        //Minetras no encontremos, repetimos la busqueda cuadraticamente
-        while(!(intento > tableHash.length) && !tableHash[index].getKey().equals(key) && tableHash[index] != null){
-            intento++;
+        while(tableHash[index] != null  &&//el espacio este ocupado
+                !(intento > tableHash.length) &&//esta dentro del hash
+                !tableHash[index].getKey().equals(key)){//key del nodo sea diferente a la que quiero poner
+            intento++;//se repite la busqueda
             index = tryCollision(key,intento);
         }
 
-        //Encontramos
-        if(tableHash[index].getKey().equals(key) && !tableHash[index].isBorrado() && !(intento > tableHash.length)){
-            tableHash[index].setBorrado(true);
+        //encontrado
+        if(tableHash[index].getKey().equals(key) && //key es igual a la que quiero
+                !tableHash[index].isBorrado() && //no esta borrado
+                !(intento > tableHash.length)){//esta dentro del hash
+            tableHash[index].setBorrado(true);//ponerlo como borrado
         }
 
-        //No encontramos
+        //no encontrado
         if(intento >= tableHash.length){
             throw new KeyNotFound();
         }
+
+        size--;
     }
 
     @Override
@@ -139,15 +144,23 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
         int intento = 0;
         int index = tryCollision(key,intento);
 
-        //Minetras no encontremos, repetimos la busqueda cuadraticamente
-        while(!(intento > tableHash.length) && !tableHash[index].getKey().equals(key) && tableHash[index] != null){
+        while(tableHash[index] != null && //el espacio este ocupado
+                !(intento > tableHash.length) && //esta dentro del hash
+                !tableHash[index].getKey().equals(key)){//key del nodo sea diferente a la que quiero poner
             intento++;
             index = tryCollision(key,intento);
         }
 
-        //Encontramos
-        if(tableHash[index].getKey().equals(key) && !tableHash[index].isBorrado() && !(intento > tableHash.length)){
+        //encontrado
+        if(tableHash[index] != null &&//si tiene contenido
+                tableHash[index].getKey().equals(key) && //key es igual a la que quiero
+                !tableHash[index].isBorrado() && //no esta borrado
+                !(intento > tableHash.length)){ //esta dentro del hash
             encontre = true;
+        }else if (tableHash[index] == null ||//si no tiene contenido
+                tableHash[index].isBorrado() ||//o si esta borrado
+                intento > tableHash.length){//o si no esta en el rango de hash
+            encontre = false;
         }
 
         return encontre;
@@ -156,5 +169,5 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
 
     public  NodoHash<K,V> getNodo(int i){
         return tableHash[i];
-    }
+    } //es necesario?
 }
