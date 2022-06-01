@@ -1,5 +1,7 @@
 package uy.edu.um.prog2.adt.linkedlist;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyLinkedListImplTest {
@@ -44,23 +46,6 @@ class MyLinkedListImplTest {
     }
 
     @org.junit.jupiter.api.Test
-    void remove() {
-        MyList<Integer> list = new MyLinkedListImpl<>();
-        list.add(4);
-        list.add(5);
-        list.add(7);
-        list.add(2);
-        list.remove(12);
-        assertEquals(4, list.size());
-        list.remove(7);
-        assertEquals(3, list.size());
-        list.remove(4);
-        assertEquals(2, list.size());
-        list.remove(2);
-        assertEquals(1, list.size());
-    }
-
-    @org.junit.jupiter.api.Test
     void size() {
         MyList<Integer> list = new MyLinkedListImpl<>();
         list.add(4);
@@ -69,5 +54,35 @@ class MyLinkedListImplTest {
         list.add(2);
 
         assertEquals(4,list.size());
+    }
+
+    @Test
+    void removePorValor() {
+        MyList<Integer> list = new MyLinkedListImpl<>();
+        list.add(4);
+        list.add(5);
+        list.add(7);
+        list.add(2);
+        list.removePorValor(12);//no esta en la lista
+        assertEquals(4, list.size());
+        list.removePorValor(7);
+        assertEquals(3, list.size());
+        list.removePorValor(4);
+        assertEquals(2, list.size());
+        list.removePorValor(2);
+        assertEquals(1, list.size());
+    }
+
+    @Test
+    void removePorPos() {
+        MyList<Integer> list = new MyLinkedListImpl<>();
+        list.add(4);
+        list.add(5);
+        list.add(7);
+        list.add(2);
+        list.removePorPos(1);
+        assertEquals(3, list.size());
+        assertEquals(4,list.get(0));
+        assertEquals(7,list.get(1));
     }
 }
