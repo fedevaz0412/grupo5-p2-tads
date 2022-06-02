@@ -24,12 +24,13 @@ class MyLinkedListImplTest {
         list.add(5);
         list.add(7);
         list.add(2);
-        list.add(null);
+        list.add(null);//no añade nada
 
         assertEquals(4,list.get(0));
         assertEquals(5,list.get(1));
         assertEquals(7,list.get(2));
         assertEquals(2,list.get(3));
+        assertEquals(null,list.get(5));
         assertEquals(4, list.size());
     }
 
@@ -63,7 +64,7 @@ class MyLinkedListImplTest {
         list.add(5);
         list.add(7);
         list.add(2);
-        list.removePorValor(12);//no esta en la lista
+        list.removePorValor(12);//no esta en la lista, no hace nada
         assertEquals(4, list.size());
         list.removePorValor(7);
         assertEquals(3, list.size());
