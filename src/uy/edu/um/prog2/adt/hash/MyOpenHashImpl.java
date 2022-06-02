@@ -71,9 +71,11 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
     }
 
     @Override
-    public V get(K key){
+    public V get(K key) throws KeyNotFound{//si hay una lista devuelve solo el primer value
+
         int position = getHashIndex(key);
         V returnData = null;
+        boolean encontre = false;
 
         MyLinkedListImpl<NodoHash<K,V>> listaActual = array[position];
 
@@ -81,11 +83,17 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
             for(int i = 0; i < listaActual.size(); i++){
                 if(listaActual.get(i).equals(key)){
                     returnData = listaActual.get(i).getData();
+                    encontre = true;
                     break;
                 }
             }
         }
-        return returnData;
+        if (!encontre){
+            throw new KeyNotFound();
+        }
+        else {
+            return returnData;
+        }
     }
 
     public MyLinkedListImpl<NodoHash<K,V>> getList(K key){//necesario?
@@ -108,11 +116,12 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
 
         if(listaActual != null){
             for(int i = 0; i < listaActual.size(); i++){
-                lugar++;
+                //lugar++;//aca elimina siempre el segundo de la lista
                 if(listaActual.get(i).equals(key)){
                     encontre = true;
                     break;
                 }
+                lugar++;//va a eliminar siempre el primero de la lista
             }
         }
 
