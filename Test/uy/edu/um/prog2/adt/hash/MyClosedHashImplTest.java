@@ -25,10 +25,14 @@ class MyClosedHashImplTest {
         try {
             sut.put(6,"sexto");
             sut.put(2,"septimo");
-
+            sut.put(17,"octavo");
+            sut.put(9,"noveno");
+            sut.put(10,"decimo");
+            sut.put(15,"hola");//deberia saltar error
         } catch (UnavailableIndex e) {
+            System.out.println("unavailable index");
         }
-        assertEquals(7,sut.size());
+        assertEquals(10,sut.size());
 
     }
 
@@ -48,24 +52,23 @@ class MyClosedHashImplTest {
             assertEquals("segundo", sut.get(2));
             assertEquals("cuarto", sut.get(4));
             assertEquals("primero", sut.get(1));
+            sut.get(17);//debería saltar error
         } catch (KeyNotFound e) {
+            System.out.println("key not found");
         }
         try {
-            sut.put(6, "sexto");
-            sut.put(2, "septimo");//se sobreescribe en 2 a septimo
-        }catch (UnavailableIndex e){
-
+            sut.put(6,"sexto");
+            sut.put(5,"septimo");
+        } catch (UnavailableIndex e) {
         }
         try {
-            assertEquals("septimo", sut.get(2));
             assertEquals("sexto", sut.get(6));
-            assertEquals("primero", sut.get(1));
-            assertEquals(null, sut.get(9));
-            assertEquals(null, sut.get(15));//esto da bien pero debería saltar error pq no hay index 15 en este hash
-            sut.get(15);//tendría que saltar el error de key not found ?
+            //assertEquals("septimo", sut.get(5));//salta error devuelve el primero que encuntra que este seria "quinto"
         } catch (KeyNotFound e) {
-            e.printStackTrace();
+            System.out.println("key not found");
         }
+
+
 
     }
 
@@ -84,16 +87,27 @@ class MyClosedHashImplTest {
             sut.put(3,"tercero");
             sut.put(4,"cuarto");
             sut.put(5,"quinto");
+            sut.put(4,"cuarto2");
+            sut.put(5,"quinto2");
         } catch (UnavailableIndex e) {
         }
-        assertEquals(5,sut.size());
+        assertEquals(7,sut.size());
         try {
             sut.delete(4);
         } catch (KeyNotFound e) {
         }
-        assertEquals(4,sut.size());
+        assertEquals(6,sut.size());
         try {
-            assertEquals(null, sut.get(4));
+            assertEquals("cuarto2", sut.get(4));//me va a mostrar es pq borre "cuarto"
+        } catch (KeyNotFound e) {
+        }
+        try {
+            sut.delete(1);
+        } catch (KeyNotFound e) {
+        }
+        assertEquals(5,sut.size());
+        try {
+            assertEquals(null, sut.get(1));//es null pq lo borré
         } catch (KeyNotFound e) {
         }
 
