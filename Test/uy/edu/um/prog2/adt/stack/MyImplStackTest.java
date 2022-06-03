@@ -19,11 +19,16 @@ class MyImplStackTest {
             assertEquals(1,stack.pop());
             assertEquals(7,stack.pop());
             assertEquals(4,stack.pop());
+            assertEquals(5,stack.pop());
         } catch (EmptyStackException e) {
 
         }
-
-        assertEquals(1,stack.size());
+        assertEquals(0,stack.size());
+        try {
+            assertEquals(1,stack.pop());//salta exception
+        } catch (EmptyStackException e) {
+            System.out.println("Empty stack");
+        }
     }
 
     @Test
@@ -74,7 +79,15 @@ class MyImplStackTest {
         try {
             assertEquals(7,stack.peek());
         } catch (EmptyStackException e) {
+        }
+        try {
+            assertEquals(7,stack.pop());
+            assertEquals(4,stack.pop());
+            assertEquals(5,stack.pop());
 
+            assertEquals(7,stack.peek());//salta error
+        } catch (EmptyStackException e) {
+            System.out.println("empty stack");
         }
 
     }
