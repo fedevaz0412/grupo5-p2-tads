@@ -44,23 +44,21 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
 
         NodoHash<K,V> nuevoNodo = new NodoHash<>(key,value);
 
-        if(intento >= tableHash.length){ // No hay lugar disponible
-            throw new UnavailableIndex();
-        }else if(tableHash[index] == null || tableHash[index].isBorrado()){ //Si hay un nodo borrado o hay lugar se inserta
-            tableHash[index] = nuevoNodo;
+        while (tableHash[index] != null && //el espacio este ocupado
+                !(intento > tableHash.length) && //esté dentro del hash
+                !tableHash[index].isBorrado() && // no este el nodo borrado ?
+                !tableHash[index].getKey().equals(key)){//key del nodo sea diferente a la que quiero poner
+            intento++;
+            index = tryCollision(key,intento);
         }
-        else {
-            while (tableHash[index] != null && //el espacio este ocupado
-                    !(intento > tableHash.length) && //esté dentro del hash
-                    !tableHash[index].isBorrado()) { //&& // no este el nodo borrado
-                //!tableHash[index].getKey().equals(key)){//key del nodo sea diferente a la que quiero poner
-                intento++;
-                index = tryCollision(key, intento);
-                if(intento >= tableHash.length) { // No hay lugar disponible
-                    throw new UnavailableIndex();
-                }
-            }
+
+        if(intento > tableHash.length){ // No hay lugar disponible
+            throw new UnavailableIndex();
+        }
+        if(tableHash[index] == null || tableHash[index].isBorrado()){ //Si hay un nodo borrado o hay lugar se inserta
             tableHash[index] = nuevoNodo;
+        } else{ //Ya existe uno y se actualiza el valor
+            tableHash[index].setData(value);
         }
         size++;
 
@@ -71,15 +69,20 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
         int intento = 0;
         V returnData = null;
 
-        while (intento < tableHash.length){
-            int index = tryCollision(key,intento);
-            if(tableHash[index] != null &&  //el espacio este ocupado
-                    tableHash[index].getKey().equals(key) && //key del nodo sea igual a la que quiero poner
-                    !tableHash[index].isBorrado()){
-                returnData = tableHash[index].getData();
-                break;
-            }
-            intento++;
+        int index = tryCollision(key,intento);
+
+        while(tableHash[index] != null &&
+                !tableHash[index].getKey().equals(key) &&
+                !(intento > tableHash.length)){
+            intento += 1;
+            index = tryCollision(key,intento);
+        }
+        //encontrado
+        if(tableHash[index] != null &&
+                !(intento > tableHash.length) &&
+                tableHash[index].getKey().equals(key) &&
+                !tableHash[index].isBorrado()){
+            returnData = tableHash[index].getData();
         }
         //no encontrado
         if (intento >= tableHash.length) {
@@ -99,21 +102,28 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
     }
 
     @Override
-    public void delete(K key) throws KeyNotFound {
+    public void delete(K key) throws KeyNotFound {//falta ver el caso que pasen una key que no existe
         int intento = 0;
+        int index = tryCollision(key,intento);
 
-        while (intento < tableHash.length) {
-            int index = tryCollision(key, intento);
-            //encontrado
-            if (tableHash[index].getKey().equals(key) && //key es igual a la que quiero
-                    !tableHash[index].isBorrado()) {//no esta borrado
-                tableHash[index].setBorrado(true);//ponerlo como borrado
-                break;
-            }
+        while(tableHash[index] != null &&
+                !(intento > tableHash.length) &&
+                !tableHash[index].getKey().equals(key)){
             intento++;
+            index = tryCollision(key,intento);
         }
+
+
+        //encontrado
+        if(tableHash[index] != null &&
+                tableHash[index].getKey().equals(key) &&
+                !tableHash[index].isBorrado() &&
+                !(intento > tableHash.length)){
+            tableHash[index].setBorrado(true);
+        }
+
         //no encontrado
-        if (intento >= tableHash.length) {
+        if (intento >= tableHash.length || tableHash[index] == null) {
             throw new KeyNotFound();
         }
 

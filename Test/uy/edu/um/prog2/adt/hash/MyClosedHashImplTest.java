@@ -18,7 +18,11 @@ class MyClosedHashImplTest {
             sut.put(3,"tercero");
             sut.put(4,"cuarto");
             sut.put(5,"quinto");
+
+            assertEquals("segundo",sut.get(2));
         } catch (UnavailableIndex e) {
+        } catch (KeyNotFound e) {
+            e.printStackTrace();
         }
         assertEquals(5,sut.size());
 
@@ -29,8 +33,11 @@ class MyClosedHashImplTest {
             sut.put(9,"noveno");
             sut.put(10,"decimo");
             sut.put(15,"hola");//deberia saltar error
+            assertEquals("septimo",sut.get(2));
         } catch (UnavailableIndex e) {
             System.out.println("unavailable index");
+        } catch (KeyNotFound e) {
+            System.out.println("key not found");
         }
         assertEquals(10,sut.size());
 
@@ -41,6 +48,11 @@ class MyClosedHashImplTest {
         MyHash<Integer,String> sut = new MyClosedHashImpl<>();
         assertEquals(0,sut.size());
         try {
+            sut.get(5);//cuando no hay nada salta a key not found
+        } catch (KeyNotFound e) {
+            System.out.println("key not found");
+        }
+        try {
             sut.put(1,"primero");
             sut.put(2,"segundo");
             sut.put(3,"tercero");
@@ -49,26 +61,27 @@ class MyClosedHashImplTest {
         } catch (UnavailableIndex e) {
         }
         try {
-            assertEquals("segundo", sut.get(2));
-            assertEquals("cuarto", sut.get(4));
             assertEquals("primero", sut.get(1));
-            sut.get(17);//debería saltar error
+            assertEquals("segundo", sut.get(2));
+            assertEquals("tercero", sut.get(3));
+            assertEquals("cuarto", sut.get(4));
+            assertEquals("quinto", sut.get(5));
+
+            sut.get(17);//salta error
         } catch (KeyNotFound e) {
             System.out.println("key not found");
         }
         try {
             sut.put(6,"sexto");
-            sut.put(5,"septimo");
+            sut.put(5,"septimo");//se sobreescribe
         } catch (UnavailableIndex e) {
         }
         try {
             assertEquals("sexto", sut.get(6));
-            //assertEquals("septimo", sut.get(5));//salta error devuelve el primero que encuntra que este seria "quinto"
+            assertEquals("septimo", sut.get(5));
         } catch (KeyNotFound e) {
             System.out.println("key not found");
         }
-
-
 
     }
 
@@ -87,29 +100,29 @@ class MyClosedHashImplTest {
             sut.put(3,"tercero");
             sut.put(4,"cuarto");
             sut.put(5,"quinto");
-            sut.put(4,"cuarto2");
-            sut.put(5,"quinto2");
         } catch (UnavailableIndex e) {
         }
-        assertEquals(7,sut.size());
+        assertEquals(5,sut.size());
         try {
             sut.delete(4);
         } catch (KeyNotFound e) {
         }
-        assertEquals(6,sut.size());
+        assertEquals(4,sut.size());
         try {
-            assertEquals("cuarto2", sut.get(4));//me va a mostrar es pq borre "cuarto"
+            assertEquals(null, sut.get(4));//salta exception
         } catch (KeyNotFound e) {
         }
         try {
             sut.delete(1);
         } catch (KeyNotFound e) {
         }
-        assertEquals(5,sut.size());
+        assertEquals(3,sut.size());
         try {
-            assertEquals(null, sut.get(1));//es null pq lo borré
+            sut.delete(18);//salta a exception pq no existe
         } catch (KeyNotFound e) {
+            System.out.println("key not found");
         }
+        assertEquals(3,sut.size());
 
     }
 
