@@ -1,0 +1,94 @@
+import java.util.Scanner;
+
+public class main {
+    public static long start = 0, stop = 0;
+
+    public static void main(String[] args) {
+        main main = new main();
+        boolean menu = true;
+        boolean cargaDatos = false;
+        
+        Scanner scanner = new Scanner(System.in);
+
+        while(menu){
+            System.out.println("Menu Principal:" + "\r\n" + "Seleccione la opción que desee:" + "\r\n" + "1. Carga de Datos" + "\r\n" + "2. Ejecutar consultas" + "\r\n" + "3. Salir");
+            int opcion = scanner.nextInt();
+
+            switch(opcion) {
+
+                case 1:
+                    if(!cargaDatos) {
+                        start = System.currentTimeMillis();
+
+                        //CARGAR DATOS PARA CADA ENTIDAD
+
+                        stop = System.currentTimeMillis();
+
+                        cargaDatos = true;
+
+                        System.out.println("Carga de datos exitosa, tiempo de ejecución de la carga: " + (stop - start) + "ms." + "\r\n");
+                    }
+                    else{
+                        System.out.println("Los datos ya fueron cargados");
+                    }
+                    break;
+                case 2:
+                    if(cargaDatos){
+                        menuConsultas(); //FALTA HACER MENU CONSULTAS
+                    }
+                    else{
+                        System.out.println("Error: Se deben cargar los datos antes de realizar consultas." + "\r\n");
+                    }
+                    break;
+                case 3:
+                    menu = false;
+                    break;
+                default:
+                    System.out.println("Opción inválida" + "\r\n");
+
+            }
+
+        }
+    }
+    public void menuConsultas(){
+        Scanner reader = new Scanner(System.in);
+        boolean menu2 = true;
+        while(menu2) {
+            System.out.println("1. Listar las 10 casas de cerveza (breweries) con más reseñas en un año."
+                    + "\r\n" + "2. Top 15 catadores con más reseñas. Este listado deberá incluir el nombre de usuario, y la cantidad de reseñas de cada uno, ordenado por cantidad de reseñas en orden descendente."
+                    + "\r\n" + "3. Cantidad de reviews en un rango dado."
+                    + "\r\n" + "4. Top 7 estilos de cervezas con mejor aroma."
+                    + "\r\n" + "5. Top 5 cervezas con más reviews."
+                    + "\r\n" + "6. Salir");
+
+            int entrada = reader.nextInt();
+
+            switch (entrada) {
+                case 1:
+                    //Consulta1
+                    break;
+                case 2:
+                    //Consulta2
+                    break;
+                case 3:
+                    //Consulta3
+                    break;
+                case 4:
+                    //Consulta4
+                    break;
+                case 5:
+                    //Consulta5
+                    break;
+                case 6:
+                    menu2 = false;
+                    break;
+                default:
+                    System.out.println("\r\n" + "Opción inválida" + "\r\n");
+            }
+        }
+    }
+}
+
+
+
+
