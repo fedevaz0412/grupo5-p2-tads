@@ -1,3 +1,6 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class main {
@@ -50,7 +53,7 @@ public class main {
 
         }
     }
-    public void menuConsultas(){
+    public static void menuConsultas(){
         Scanner reader = new Scanner(System.in);
         boolean menu2 = true;
         while(menu2) {
@@ -65,12 +68,33 @@ public class main {
 
             switch (entrada) {
                 case 1:
+                    System.out.println("Ingrese el año:");
+                    SimpleDateFormat formato = new SimpleDateFormat("yyyy");
+                    String input = reader.next();
+                    try {
+                        Date año = formato.parse(input);//en año queda el año con formato Date
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    //usar año para hacer la consulta
                     //Consulta1
                     break;
                 case 2:
                     //Consulta2
                     break;
                 case 3:
+                    System.out.println("Ingrese la fecha de inicio:");
+                    SimpleDateFormat formato2 = new SimpleDateFormat("dd-MM-yyyy");
+                    String input1 = reader.next();
+                    System.out.println("Ingrese la fecha de finalización:");
+                    String input2 = reader.next();
+                    try {
+                        Date inicio = formato2.parse(input1);//queda con formato Date
+                        Date finalizacion = formato2.parse(input1);//queda con formato Date
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    //usar inicio y finalizacion para hacer la consulta
                     //Consulta3
                     break;
                 case 4:
