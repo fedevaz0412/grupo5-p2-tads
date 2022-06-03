@@ -128,4 +128,24 @@ class MyOpenHashImplTest {
 
 
     }
+
+    @Test
+    void size() {
+        HashTable<Integer, String> sut = new MyOpenHashImpl<>(20);
+        assertEquals(0, sut.size());
+        sut.put(1,"primero");
+        sut.put(2,"segundo");
+        sut.put(3,"tercero");
+        sut.put(4,"cuarto");
+        sut.put(5,"quinto");
+        assertEquals(5, sut.size());
+        try {
+            sut.remove(4);
+        } catch (KeyNotFound e) {
+            //e.printStackTrace();
+            System.out.println("key not found");
+        }
+        assertEquals(4, sut.size());
+
+    }
 }

@@ -7,4 +7,5 @@ public interface HashTable <K, V> {
     boolean contains(K key);
     void remove(K key) throws KeyNotFound;
     V get(K key) throws KeyNotFound;
+    int size ();
 }

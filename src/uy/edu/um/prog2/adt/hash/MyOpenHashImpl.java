@@ -15,6 +15,8 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
         this.capacity = capacity;
     }
 
+    private  int size;
+
 
     public MyOpenHashImpl(int capacity) {
         this.capacity = capacity;
@@ -50,6 +52,7 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
         else {
             posicionLista.add(new NodoHash<>(key, value));  //no tiene en cuenta objetos identicos
         }
+        size++;
     }
 
     @Override
@@ -96,6 +99,11 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
         }
     }
 
+    @Override
+    public int size() {
+        return size;
+    }
+
     public MyLinkedListImpl<NodoHash<K,V>> getList(K key){//necesario?
         int postion = getHashIndex(key);
         return array[postion];
@@ -103,7 +111,7 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
 
     public MyLinkedListImpl<NodoHash<K,V>> getList(int i){//necesario?
         return array[i];
-    }
+    }//getlist por position de hash
 
     @Override
     public void remove(K key) throws KeyNotFound {
@@ -130,6 +138,7 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
         }
         else {
             listaActual.removePorPos(lugar);
+            size--;
         }
     }
 }
