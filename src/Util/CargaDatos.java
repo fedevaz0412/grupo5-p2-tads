@@ -35,6 +35,7 @@ public class CargaDatos {
                 Beer nuevaBeer = new Beer(Long.parseLong(atributos[13]), atributos[11], Double.parseDouble(atributos[12]));
 
                 try {
+                    //VALIDAR QUE NO EXISTA O QUE SEA NULL!!!!
                     beerHash.put(nuevaBeer.getId(), nuevaBeer);
                 } catch (UnavailableIndex unavailableIndex) {
                     unavailableIndex.printStackTrace();
