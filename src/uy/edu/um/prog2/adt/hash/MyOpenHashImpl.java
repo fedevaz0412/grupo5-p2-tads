@@ -124,12 +124,12 @@ public class MyOpenHashImpl <K extends Comparable<K>,V> implements HashTable<K,V
 
         if(listaActual != null){
             for(int i = 0; i < listaActual.size(); i++){
-                //lugar++;//aca elimina siempre el segundo de la lista
+
                 if(listaActual.get(i).equals(key)){
                     encontre = true;
                     break;
                 }
-                lugar++;//va a eliminar siempre el primero de la lista
+                lugar++;
             }
         }
 
