@@ -30,7 +30,7 @@ public class CargaDatos {
     public static MyClosedHashImpl<String, Style> styleHash = new MyClosedHashImpl<>(1500000);
 
     public static void Cargar() {
-        String filename = "beer_dataset_test2.csv";
+        String filename = "beer_dataset_test.csv";
         Path pathToFile1 = Paths.get(filename);
         try (BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
             String line = reader.readLine();
