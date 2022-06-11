@@ -12,9 +12,10 @@ public class Review {
     private double appearanceScore;
     private double flavourScore;
     private long beerId;
+    private long breweryId;
 
     //Constructor
-    public Review(long id, Date date, double overallScore, double aromaScore, double appearanceScore, double flavourScore, long beerId) {
+    public Review(long id, Date date, double overallScore, double aromaScore, double appearanceScore, double flavourScore, long beerId, long breweryId) {
         this.id = id;
         this.date = date;
         this.overallScore = overallScore;
@@ -22,6 +23,7 @@ public class Review {
         this.appearanceScore = appearanceScore;
         this.flavourScore = flavourScore;
         this.beerId = beerId;
+        this.breweryId = breweryId;
 
     }
     //Getters
@@ -48,4 +50,8 @@ public class Review {
     public double getFlavourScore() {
         return flavourScore;
     }
+
+    public long getBeerId() { return beerId; }
+
+    public long getBreweryId() { return breweryId; }
 }
