@@ -13,7 +13,8 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static Util.Conversores.epochToDate;
+import static Util.Conversores.*;
+import static Util.Conversores.stringALong;
 
 
 public class CargaDatos {
@@ -37,20 +38,20 @@ public class CargaDatos {
             while (line != null) {
                 String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 //CREAR ENTIDADES EN BASE A LA LÍNEA
-                Beer nuevaBeer = new Beer(Long.parseLong(atributos[13]), atributos[11], Double.parseDouble(atributos[12]));
+                Beer nuevaBeer = new Beer(stringALong(atributos[13]), atributos[11], stringADouble(atributos[12]), stringALong(atributos[1]));
                 User nuevoUser = new User(atributos[7]);
                 Date review_date = epochToDate(atributos[3]);
-                Review nuevaReview = new Review(Long.parseLong(atributos[0]),review_date,
-                        Double.parseDouble(atributos[4]),Double.parseDouble(atributos[5]),
-                        Double.parseDouble(atributos[6]),Double.parseDouble(atributos[10]), //se toma review_taste como flavour
-                        Long.parseLong(atributos[13]));
-                Brewery nuevaBrewery = new Brewery(Long.parseLong(atributos[1]),atributos[2]);
+                Review nuevaReview = new Review(stringALong(atributos[0]),review_date,
+                        stringADouble(atributos[4]),stringADouble(atributos[5]),
+                        stringADouble(atributos[6]),stringADouble(atributos[10]), //se toma review_taste como flavour
+                        stringALong(atributos[13]),stringALong(atributos[1]));
+                Brewery nuevaBrewery = new Brewery(stringALong(atributos[1]),atributos[2]);
                 Style nuevoStyle = new Style(atributos[8]);
 
                 //PONER NUEVOS EN SUS RESPECTIVOS TADS
                 try {
                     //BEER
-                    if(atributos[13] != "" && atributos[11] != "" && atributos[12] != ""
+                    if(atributos[13] != "" && atributos[11] != "" && atributos[12] != "" && atributos[1] != ""
                             && !beerHash.contains(nuevaBeer.getId())){
                         beerHash.put(nuevaBeer.getId(), nuevaBeer);
                     }
@@ -60,7 +61,7 @@ public class CargaDatos {
                     }
                     //REVIEW
                     if (atributos[0] != "" && atributos[3] != "" && atributos[4] != "" && atributos[5] != "" &&
-                            atributos[6] != "" && atributos[7] != "" && atributos[8] != "" &&
+                            atributos[6] != "" && atributos[7] != "" && atributos[8] != "" && atributos[1] != "" &&
                             !reviewHash.contains(nuevaReview.getId())){
                         reviewHash.put(nuevaReview.getId(),nuevaReview);
                     }
