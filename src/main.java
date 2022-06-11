@@ -1,5 +1,7 @@
 import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
 import uy.edu.um.prog2.adt.hash.exceptions.UnavailableIndex;
+import uy.edu.um.prog2.adt.heap.exceptions.EmptyHeapException;
+import uy.edu.um.prog2.adt.heap.exceptions.FullHeap;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -91,6 +93,10 @@ public class main {
                         } catch (KeyNotFound e) {
                             e.printStackTrace();
                         } catch (UnavailableIndex e) {
+                            e.printStackTrace();
+                        } catch (FullHeap e) {
+                            e.printStackTrace();
+                        } catch (EmptyHeapException e) {
                             e.printStackTrace();
                         }
                     }else{
