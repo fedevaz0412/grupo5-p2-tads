@@ -1,7 +1,14 @@
+import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
+import uy.edu.um.prog2.adt.hash.exceptions.UnavailableIndex;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+
+import static Util.CargaDatos.Cargar;
+import static Util.Consultas.Consulta1;
+import static Util.Consultas.Consulta3;
 
 public class main {
     public static long start = 0, stop = 0;
@@ -24,6 +31,7 @@ public class main {
                         start = System.currentTimeMillis();
 
                         //CARGAR DATOS PARA CADA ENTIDAD
+                        Cargar();
 
                         stop = System.currentTimeMillis();
 
@@ -71,13 +79,24 @@ public class main {
                     System.out.println("Ingrese el año:");
                     SimpleDateFormat formato = new SimpleDateFormat("yyyy");
                     String input = reader.next();
-                    try {
-                        Date año = formato.parse(input);//en año queda el año con formato Date
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    boolean isDate = false;
+                    String datePattern = "\\d{4}";
+                    isDate = input.matches(datePattern);
+                    if (isDate) {
+                        try {
+                            Date year = formato.parse(input);//en año queda el año con formato Date
+                            Consulta1(year);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        } catch (KeyNotFound e) {
+                            e.printStackTrace();
+                        } catch (UnavailableIndex e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        System.out.println("Error introduzca año con formato: yyyy ");
                     }
-                    //usar año para hacer la consulta
-                    //Consulta1
+
                     break;
                 case 2:
                     //Consulta2
@@ -88,14 +107,23 @@ public class main {
                     String input1 = reader.next();
                     System.out.println("Ingrese la fecha de finalización:");
                     String input2 = reader.next();
-                    try {
-                        Date inicio = formato2.parse(input1);//queda con formato Date
-                        Date finalizacion = formato2.parse(input1);//queda con formato Date
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    boolean isDate1 = false;
+                    boolean isDate2 = false;
+                    String datePattern2 = "\\d{1,2}/\\d{1,2}/\\d{4}";
+                    isDate1 = input1.matches(datePattern2);
+                    isDate2 = input2.matches(datePattern2);
+                    if (isDate1 && isDate2) {
+                        try {
+                            Date inicio = formato2.parse(input1);//queda con formato Date
+                            Date finalizacion = formato2.parse(input2);//queda con formato Date
+                            Consulta3(inicio,finalizacion);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        System.out.println("Error introduzca las fechas con formato: dd/MM/yyyy ");
                     }
-                    //usar inicio y finalizacion para hacer la consulta
-                    //Consulta3
+
                     break;
                 case 4:
                     //Consulta4
