@@ -6,8 +6,12 @@ public class ArrayList<T> implements ListaArray<T> {
 
     private int size;
     private T[] list;
-    //private final int DEFAULT_INITIAL_ARRAYLIST_SIZE = 5;
+    private final int DEFAULT_INITIAL_ARRAYLIST_SIZE = 5;
 
+    public ArrayList() {
+        this.size = 0;
+        this.list = (T[]) new Object[DEFAULT_INITIAL_ARRAYLIST_SIZE];
+    }
 
     public ArrayList(int size) {
         this.size = 0;
@@ -34,10 +38,10 @@ public class ArrayList<T> implements ListaArray<T> {
             System.out.println("PROBLEMA");
             this.setList(nuevaArrayList);
         }
-        this.list[position] = value;
         if(this.list[position] == null){
             size++;
         }
+        this.list[position] = value;
 
     }
 
@@ -53,7 +57,7 @@ public class ArrayList<T> implements ListaArray<T> {
             for (int i = 0; i < this.list.length; i++) {
                 nuevaArrayList[i] = this.list[i];
             }
-            System.out.println("PROBLEMA ARRAYLIST");
+            //System.out.println("PROBLEMA ARRAYLIST");
             this.setList(nuevaArrayList);
         } //Pocas veces deberia suceder en este obligatorio
         this.list[size] = value;
@@ -108,8 +112,19 @@ public class ArrayList<T> implements ListaArray<T> {
 
     @Override
     public boolean removeElement(T value) {
-        // No lo necesito
-        return false;
+        boolean encontre = false;
+        int posicion = 0;
+
+        while (!encontre && posicion < this.size) {
+            if (this.list[posicion].equals(value)) {
+                encontre = true;
+                this.list[posicion] = null;
+                size--;
+            }
+            posicion++;
+        }
+
+        return encontre;
     }
 
     @Override
