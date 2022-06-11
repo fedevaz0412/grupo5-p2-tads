@@ -1,5 +1,7 @@
 package uy.edu.um.prog2.adt.hash;
 
+import uy.edu.um.prog2.adt.arraylist.ArrayList;
+import uy.edu.um.prog2.adt.arraylist.ListaArray;
 import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
 import uy.edu.um.prog2.adt.hash.exceptions.UnavailableIndex;
 
@@ -12,12 +14,16 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
 
     private int size;
 
+    private ListaArray<K> arraylistKeys = new ArrayList<>();
+
+    public ListaArray<K> getArraylistKeys() { return arraylistKeys; }
 
     public MyClosedHashImpl() {
-        tableHash = new NodoHash[DEFAULT_INITIAL_TABLE_HASH_SIZE];//array de nodos de tam definido
+        this.tableHash = new NodoHash[DEFAULT_INITIAL_TABLE_HASH_SIZE];//array de nodos de tam definido
     }
     public MyClosedHashImpl(int tableHashSize) {
-        tableHash = new NodoHash[tableHashSize];
+        this.tableHash = new NodoHash[tableHashSize];
+        this.arraylistKeys = new ArrayList<>(tableHashSize);
     }
 
 
@@ -57,10 +63,11 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
         }
         if(tableHash[index] == null || tableHash[index].isBorrado()){ //Si hay un nodo borrado o hay lugar se inserta
             tableHash[index] = nuevoNodo;
+            size++;
+            arraylistKeys.addLast(key);
         } else{ //Ya existe uno y se actualiza el valor
             tableHash[index].setData(value);
         }
-        size++;
 
     }
 
@@ -128,6 +135,7 @@ public class MyClosedHashImpl <K extends Comparable<K>, V> implements MyHash<K, 
         }
 
         size--;
+        arraylistKeys.removeElement(key);
     }
 
     @Override

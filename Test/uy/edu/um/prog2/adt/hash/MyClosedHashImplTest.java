@@ -28,18 +28,18 @@ class MyClosedHashImplTest {
 
         try {
             sut.put(6,"sexto");
-            sut.put(2,"septimo");
+            sut.put(2,"septimo");//no suma a size
             sut.put(17,"octavo");
             sut.put(9,"noveno");
             sut.put(10,"decimo");
-            sut.put(15,"hola");//deberia saltar error
+            sut.put(15,"hola");//deberia saltar error (no cuenta para el size)
             assertEquals("septimo",sut.get(2));
         } catch (UnavailableIndex e) {
             System.out.println("unavailable index");
         } catch (KeyNotFound e) {
             System.out.println("key not found");
         }
-        assertEquals(10,sut.size());
+        assertEquals(9,sut.size());
 
     }
 
@@ -136,9 +136,11 @@ class MyClosedHashImplTest {
             sut.put(3,"tercero");
             sut.put(4,"cuarto");
             sut.put(5,"quinto");
+            sut.put(6,"sexto");
+            sut.put(5,"quinto2");//no debería aumentar el size
         } catch (UnavailableIndex e) {
         }
-        assertEquals(5,sut.size());
+        assertEquals(6,sut.size());
     }
 
     @Test
