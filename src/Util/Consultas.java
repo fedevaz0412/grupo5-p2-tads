@@ -21,7 +21,7 @@ import static Util.Conversores.convertToLocalDateTimeViaInstant;
 public class Consultas {
     public static void Consulta1(Date year) throws KeyNotFound, UnavailableIndex, FullHeap, EmptyHeapException {
         System.out.println("Haciendo consulta 1");
-        MyClosedHashImpl<Long, Review> reviewHashYear = new MyClosedHashImpl<>(1500000);//hash con reviews en el año indicado
+        MyClosedHashImpl<Long, Review> reviewHashYear = new MyClosedHashImpl<>(1600000);//hash con reviews en el año indicado
         ListaArray<Long> idsRev = reviewHash.getArraylistKeys();
         //System.out.println("size array de idsRev: " + idsRev.size());
         LocalDateTime yearEnLocalDate = convertToLocalDateTimeViaInstant(year);
@@ -37,7 +37,7 @@ public class Consultas {
 
         ListaArray<Long> idsRevEnYear = reviewHashYear.getArraylistKeys();
         //System.out.println("cant idsRevENYear: " + idsRevEnYear.size());
-        MyClosedHashImpl<Long, Integer> hashCons1 = new MyClosedHashImpl<>(1500000);//hash con id de la brewery y cant de reviews para esa brewery
+        MyClosedHashImpl<Long, Integer> hashCons1 = new MyClosedHashImpl<>(1600000);//hash con id de la brewery y cant de reviews para esa brewery
         //System.out.println("cant reviewHashYear: " + reviewHashYear.size());//hash con reviews en el año indicado
         for (int i = 0; i<idsRevEnYear.size();i++){
             Long revIdCurrent = idsRevEnYear.get(i);
