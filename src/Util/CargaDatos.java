@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import static Util.Conversores.*;
 import static Util.Conversores.stringALong;
@@ -51,26 +52,26 @@ public class CargaDatos {
                 //PONER NUEVOS EN SUS RESPECTIVOS TADS
                 try {
                     //BEER
-                    if(atributos[13] != "" && atributos[11] != "" && atributos[12] != "" && atributos[1] != ""
+                    if(!Objects.equals(atributos[13], "") && !Objects.equals(atributos[11], "") && !Objects.equals(atributos[12], "") && !Objects.equals(atributos[1], "")
                             && !beerHash.contains(nuevaBeer.getId())){
                         beerHash.put(nuevaBeer.getId(), nuevaBeer);
                     }
                     //USER
-                    if (atributos[7] != "" && !userHash.contains(nuevoUser.getUsername())){
+                    if (!Objects.equals(atributos[7], "") && !userHash.contains(nuevoUser.getUsername())){
                         userHash.put(nuevoUser.getUsername(), nuevoUser);
                     }
                     //REVIEW
-                    if (atributos[0] != "" && atributos[3] != "" && atributos[4] != "" && atributos[5] != "" &&
-                            atributos[6] != "" && atributos[7] != "" && atributos[8] != "" && atributos[1] != "" &&
+                    if (!Objects.equals(atributos[0], "") && !Objects.equals(atributos[3], "") && !Objects.equals(atributos[4], "") && !Objects.equals(atributos[5], "") &&
+                            !Objects.equals(atributos[6], "") && !Objects.equals(atributos[7], "") && !Objects.equals(atributos[8], "") && !Objects.equals(atributos[1], "") &&
                             !reviewHash.contains(nuevaReview.getId())){
                         reviewHash.put(nuevaReview.getId(),nuevaReview);
                     }
                     //BREWERY
-                    if (atributos[1] != "" && atributos[2] != "" && !breweryHash.contains(nuevaBrewery.getId())){
+                    if (!Objects.equals(atributos[1], "") && !Objects.equals(atributos[2], "") && !breweryHash.contains(nuevaBrewery.getId())){
                         breweryHash.put(nuevaBrewery.getId(), nuevaBrewery);
                     }
                     //STYLE
-                    if (atributos[8] != "" && !styleHash.contains(nuevoStyle.getName())){
+                    if (!Objects.equals(atributos[8], "") && !styleHash.contains(nuevoStyle.getName())){
                         styleHash.put(nuevoStyle.getName(),nuevoStyle);
                     }
 
