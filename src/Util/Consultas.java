@@ -12,7 +12,6 @@ import uy.edu.um.prog2.adt.heap.HeapNode;
 import uy.edu.um.prog2.adt.heap.exceptions.EmptyHeapException;
 import uy.edu.um.prog2.adt.heap.exceptions.FullHeap;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 

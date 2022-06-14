@@ -110,7 +110,7 @@ public class main {
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicioen formato dd/MM/yyyy:");
-                    SimpleDateFormat formato2 = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
                     String input1 = reader.next();
                     System.out.println("Ingrese la fecha de finalización:");
                     String input2 = reader.next();
