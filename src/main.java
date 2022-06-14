@@ -79,7 +79,7 @@ public class main {
 
             switch (entrada) {
                 case 1:
-                    System.out.println("Ingrese el año:");
+                    System.out.println("Ingrese el año en formato: yyyy");
                     SimpleDateFormat formato = new SimpleDateFormat("yyyy");
                     String input = reader.next();
                     boolean isDate = false;
