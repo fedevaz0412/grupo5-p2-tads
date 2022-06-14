@@ -12,7 +12,6 @@ import static Util.CargaDatos.Cargar;
 import static Util.Consultas.Consulta1;
 import static Util.Consultas.Consulta2;
 import static Util.Consultas.Consulta3;
-import static Util.Consultas.*;
 
 public class main {
     public static long start = 0, stop = 0;
@@ -80,7 +79,7 @@ public class main {
 
             switch (entrada) {
                 case 1:
-                    System.out.println("Ingrese el año en formato: yyyy");
+                    System.out.println("Ingrese el año en formato yyyy: ");
                     SimpleDateFormat formato = new SimpleDateFormat("yyyy");
                     String input = reader.next();
                     boolean isDate = false;
@@ -110,8 +109,8 @@ public class main {
                     Consulta2();
                     break;
                 case 3:
-                    System.out.println("Ingrese la fecha de inicio:");
-                    SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
+                    System.out.println("Ingrese la fecha de inicioen formato dd/MM/yyyy:");
+                    SimpleDateFormat formato2 = new SimpleDateFormat("dd-MM-yyyy");
                     String input1 = reader.next();
                     System.out.println("Ingrese la fecha de finalización:");
                     String input2 = reader.next();
@@ -127,8 +126,6 @@ public class main {
                             Consulta3(inicio,finalizacion);
                         } catch (ParseException e) {
                             e.printStackTrace();
-                        } catch (KeyNotFound e) {
-                            e.printStackTrace();
                         }
                     }else{
                         System.out.println("Error introduzca las fechas con formato: dd/MM/yyyy ");
@@ -137,7 +134,6 @@ public class main {
                     break;
                 case 4:
                     //Consulta4
-                    Consulta4();
                     break;
                 case 5:
                     //Consulta5
