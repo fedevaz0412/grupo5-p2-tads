@@ -49,28 +49,35 @@ public class CargaDatos {
 
                 //PONER NUEVOS EN SUS RESPECTIVOS TADS
                 try {
-                    //BEER
-                    if(!Objects.equals(atributos[13], "") && !Objects.equals(atributos[11], "") && !Objects.equals(atributos[12], "") && !Objects.equals(atributos[1], "")
-                            && !beerHash.contains(nuevaBeer.getId())){
-                        beerHash.put(nuevaBeer.getId(), nuevaBeer);
-                    }
-                    //USER
-                    if (!Objects.equals(atributos[7], "") && !userHash.contains(nuevoUser.getUsername())){
-                        userHash.put(nuevoUser.getUsername(), nuevoUser);
-                    }
-                    //REVIEW
-                    if (!Objects.equals(atributos[0], "") && !Objects.equals(atributos[3], "") && !Objects.equals(atributos[4], "") && !Objects.equals(atributos[5], "") &&
-                            !Objects.equals(atributos[6], "") && !Objects.equals(atributos[7], "") && !Objects.equals(atributos[8], "") && !Objects.equals(atributos[1], "") &&
-                            !reviewHash.contains(nuevaReview.getId())){
-                        reviewHash.put(nuevaReview.getId(),nuevaReview);
-                    }
-                    //BREWERY
-                    if (!Objects.equals(atributos[1], "") && !Objects.equals(atributos[2], "") && !breweryHash.contains(nuevaBrewery.getId())){
-                        breweryHash.put(nuevaBrewery.getId(), nuevaBrewery);
-                    }
-                    //STYLE
-                    if (!Objects.equals(atributos[8], "") && !styleHash.contains(nuevoStyle.getName())){
-                        styleHash.put(nuevoStyle.getName(),nuevoStyle);
+                    // Se toma que si hay alguna columna vacía se ignora toda la línea
+                    if(!Objects.equals(atributos[0], "") && !Objects.equals(atributos[1], "")
+                            && !Objects.equals(atributos[2], "") && !Objects.equals(atributos[3], "")
+                            && !Objects.equals(atributos[4], "") && !Objects.equals(atributos[5], "")
+                            && !Objects.equals(atributos[6], "") && !Objects.equals(atributos[7], "")
+                            && !Objects.equals(atributos[8], "") && !Objects.equals(atributos[9], "")
+                            && !Objects.equals(atributos[10], "") && !Objects.equals(atributos[11], "")
+                            && !Objects.equals(atributos[12], "") && !Objects.equals(atributos[13], "") ) {
+
+                        //BEER
+                        if (!beerHash.contains(nuevaBeer.getId())) {
+                            beerHash.put(nuevaBeer.getId(), nuevaBeer);
+                        }
+                        //USER
+                        if (!userHash.contains(nuevoUser.getUsername())) {
+                            userHash.put(nuevoUser.getUsername(), nuevoUser);
+                        }
+                        //REVIEW
+                        if (!reviewHash.contains(nuevaReview.getId())) {
+                            reviewHash.put(nuevaReview.getId(), nuevaReview);
+                        }
+                        //BREWERY
+                        if (!breweryHash.contains(nuevaBrewery.getId())) {
+                            breweryHash.put(nuevaBrewery.getId(), nuevaBrewery);
+                        }
+                        //STYLE
+                        if (!styleHash.contains(nuevoStyle.getName())) {
+                            styleHash.put(nuevoStyle.getName(), nuevoStyle);
+                        }
                     }
 
                 } catch (UnavailableIndex unavailableIndex) {
