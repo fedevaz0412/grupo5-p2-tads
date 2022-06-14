@@ -77,9 +77,7 @@ public class Consultas {
     }
     public static void Consulta2() throws KeyNotFound, UnavailableIndex, FullHeap, EmptyHeapException {
         ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
-        //System.out.println("cant idsRevENYear: " + idsRevEnYear.size());
-        MyClosedHashImpl<String, Integer> hashCons2 = new MyClosedHashImpl<>(1600000);//hash con id del usuario y cant de reviews del usuario
-        //System.out.println("cant reviewHashYear: " + reviewHashYear.size());//hash con reviews en el año indicado
+        MyClosedHashImpl<String, Integer> hashCons2 = new MyClosedHashImpl<>(1600000);//hash con el usuario y cant de reviews del usuario
         for (int i = 0; i<idsReviews.size();i++){
             Long revIdCurrent = idsReviews.get(i);
             Review revCurrent = reviewHash.get(revIdCurrent);
@@ -98,7 +96,6 @@ public class Consultas {
             int cant = hashCons2.get(userCurrent);
 
             User usernameCurrent = userHash.get(userCurrent);
-            //Integer cant = hashCons1.getPosition(i);
             heapTopReviews.insertMaxHeap(cant,usernameCurrent);
         }
         for (int z = 0; z < 15; z++) {
