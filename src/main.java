@@ -79,7 +79,7 @@ public class main {
 
             switch (entrada) {
                 case 1:
-                    System.out.println("Ingrese el año en formato: yyyy");
+                    System.out.println("Ingrese el año en formato yyyy: ");
                     SimpleDateFormat formato = new SimpleDateFormat("yyyy");
                     String input = reader.next();
                     boolean isDate = false;
@@ -109,7 +109,7 @@ public class main {
                     Consulta2();
                     break;
                 case 3:
-                    System.out.println("Ingrese la fecha de inicio:");
+                    System.out.println("Ingrese la fecha de inicioen formato dd/MM/yyyy:");
                     SimpleDateFormat formato2 = new SimpleDateFormat("dd-MM-yyyy");
                     String input1 = reader.next();
                     System.out.println("Ingrese la fecha de finalización:");
