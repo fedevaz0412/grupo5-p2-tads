@@ -10,12 +10,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
 import static Util.Conversores.*;
-import static Util.Conversores.stringALong;
 
 
 public class CargaDatos {
@@ -31,7 +29,7 @@ public class CargaDatos {
     public static MyClosedHashImpl<String, Style> styleHash = new MyClosedHashImpl<>(1600000);
 
     public static void Cargar() {
-        String filename = "beer_dataset_full.csv";
+        String filename = "beer_dataset_test.csv";
         Path pathToFile1 = Paths.get(filename);
         try (BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
             String line = reader.readLine();

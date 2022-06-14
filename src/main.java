@@ -47,7 +47,7 @@ public class main {
                     break;
                 case 2:
                     if(cargaDatos){
-                        menuConsultas(); //FALTA HACER MENU CONSULTAS
+                        menuConsultas();
                     }
                     else{
                         System.out.println("Error: Se deben cargar los datos antes de realizar consultas." + "\r\n");
