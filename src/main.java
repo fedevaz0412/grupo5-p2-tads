@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import static Util.CargaDatos.Cargar;
-import static Util.Consultas.Consulta1;
-import static Util.Consultas.Consulta2;
-import static Util.Consultas.Consulta3;
+import static Util.Consultas.*;
 
 public class main {
     public static long start = 0, stop = 0;
@@ -89,15 +87,7 @@ public class main {
                         try {
                             Date year = formato.parse(input);//en año queda el año con formato Date
                             Consulta1(year);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        } catch (KeyNotFound e) {
-                            e.printStackTrace();
-                        } catch (UnavailableIndex e) {
-                            e.printStackTrace();
-                        } catch (FullHeap e) {
-                            e.printStackTrace();
-                        } catch (EmptyHeapException e) {
+                        } catch (ParseException | EmptyHeapException | FullHeap | UnavailableIndex | KeyNotFound e) {
                             e.printStackTrace();
                         }
                     }else{
@@ -109,10 +99,10 @@ public class main {
                     Consulta2();
                     break;
                 case 3:
-                    System.out.println("Ingrese la fecha de inicioen formato dd/MM/yyyy:");
                     SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
+                    System.out.println("Ingrese la fecha de inicio en formato dd/MM/yyyy:");
                     String input1 = reader.next();
-                    System.out.println("Ingrese la fecha de finalización:");
+                    System.out.println("Ingrese la fecha de finalización en formato dd/MM/yyyy:");
                     String input2 = reader.next();
                     boolean isDate1 = false;
                     boolean isDate2 = false;
@@ -133,7 +123,7 @@ public class main {
 
                     break;
                 case 4:
-                    //Consulta4
+                    Consulta4();
                     break;
                 case 5:
                     //Consulta5
