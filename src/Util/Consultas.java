@@ -2,6 +2,7 @@ package Util;
 
 import Entidades.Brewery;
 import Entidades.Review;
+import Entidades.User;
 import uy.edu.um.prog2.adt.arraylist.ListaArray;
 import uy.edu.um.prog2.adt.hash.MyClosedHashImpl;
 import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
@@ -14,8 +15,7 @@ import uy.edu.um.prog2.adt.heap.exceptions.FullHeap;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import static Util.CargaDatos.breweryHash;
-import static Util.CargaDatos.reviewHash;
+import static Util.CargaDatos.*;
 import static Util.Conversores.convertToLocalDateTimeViaInstant;
 
 public class Consultas {
@@ -74,6 +74,45 @@ public class Consultas {
         }
 
         System.out.println("Consulta 1 finalizada");
+    }
+    public static void Consulta2() throws KeyNotFound, UnavailableIndex, FullHeap, EmptyHeapException {
+        ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
+        //System.out.println("cant idsRevENYear: " + idsRevEnYear.size());
+        MyClosedHashImpl<String, Integer> hashCons2 = new MyClosedHashImpl<>(1600000);//hash con id del usuario y cant de reviews del usuario
+        //System.out.println("cant reviewHashYear: " + reviewHashYear.size());//hash con reviews en el año indicado
+        for (int i = 0; i<idsReviews.size();i++){
+            Long revIdCurrent = idsReviews.get(i);
+            Review revCurrent = reviewHash.get(revIdCurrent);
+            String userIdCurrent = revCurrent.getUserId();
+            if (hashCons2.contains(userIdCurrent)){
+                int count = hashCons2.get(userIdCurrent);
+                hashCons2.put(userIdCurrent,(count+1));
+            }else{
+                hashCons2.put(userIdCurrent,1);
+            }
+        }
+        ListaArray<String> usersHashCons2 = hashCons2.getArraylistKeys();
+        HeapImpl<Integer, User> heapTopReviews = new HeapImpl<>(hashCons2.size()*2);
+        for (int i = 0; i< usersHashCons2.size();i++){
+            String userCurrent = usersHashCons2.get(i);
+            int cant = hashCons2.get(userCurrent);
+
+            User usernameCurrent = userHash.get(userCurrent);
+            //Integer cant = hashCons1.getPosition(i);
+            heapTopReviews.insertMaxHeap(cant,usernameCurrent);
+        }
+        for (int z = 0; z < 15; z++) {
+            try {HeapNode<Integer,User> actual = heapTopReviews.delete();
+                System.out.println("User: " + actual.getData().getUsername() + "\n"
+                        + "Cantidad de reviews: " + actual.getKey() + "\r\n");
+            }
+            catch(EmptyHeapException E) {
+                System.out.println("ERROR, no hay reseñas");
+                break;
+            }
+        }
+
+        System.out.println("Consulta 2 finalizada");
     }
 
     public static void Consulta3(Date inicio, Date finalizacion){
