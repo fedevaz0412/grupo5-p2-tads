@@ -9,12 +9,15 @@ import java.util.Date;
 import java.util.Scanner;
 
 import static Util.CargaDatos.Cargar;
+import static Util.Consultas.Consulta1;
+import static Util.Consultas.Consulta2;
+import static Util.Consultas.Consulta3;
 import static Util.Consultas.*;
 
 public class main {
     public static long start = 0, stop = 0;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FullHeap, UnavailableIndex, EmptyHeapException, KeyNotFound {
         main main = new main();
         boolean menu = true;
         boolean cargaDatos = false;
@@ -62,7 +65,7 @@ public class main {
 
         }
     }
-    public static void menuConsultas(){
+    public static void menuConsultas() throws FullHeap, UnavailableIndex, EmptyHeapException, KeyNotFound {
         Scanner reader = new Scanner(System.in);
         boolean menu2 = true;
         while(menu2) {
@@ -77,7 +80,7 @@ public class main {
 
             switch (entrada) {
                 case 1:
-                    System.out.println("Ingrese el año:");
+                    System.out.println("Ingrese el año en formato: yyyy");
                     SimpleDateFormat formato = new SimpleDateFormat("yyyy");
                     String input = reader.next();
                     boolean isDate = false;
@@ -104,7 +107,7 @@ public class main {
 
                     break;
                 case 2:
-                    //Consulta2
+                    Consulta2();
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicio:");
