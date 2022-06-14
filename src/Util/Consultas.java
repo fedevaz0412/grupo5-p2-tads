@@ -62,10 +62,15 @@ public class Consultas {
             heapTopReviews.insertMaxHeap(cant,breweryCurrent);
         }
         for (int z = 0; z < 10; z++) {
-            HeapNode<Integer,Brewery> actual = heapTopReviews.delete();
-            System.out.println("Brewery ID: " + actual.getData().getId() + "\n"
-                    + "Brewery name: " + actual.getData().getName() + "\n"
-                    + "Cantidad de reviews: " + actual.getKey() + "\r\n");
+            try {HeapNode<Integer,Brewery> actual = heapTopReviews.delete();
+                System.out.println("Brewery ID: " + actual.getData().getId() + "\n"
+                        + "Brewery name: " + actual.getData().getName() + "\n"
+                        + "Cantidad de reviews: " + actual.getKey() + "\r\n");
+            }
+            catch(EmptyHeapException E) {
+                System.out.println("ERROR, no hay reseñas");
+                break;
+            }
         }
 
         System.out.println("Consulta 1 finalizada");
