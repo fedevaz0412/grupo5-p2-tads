@@ -9,8 +9,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 import static Util.CargaDatos.Cargar;
-import static Util.Consultas.Consulta1;
-import static Util.Consultas.Consulta3;
+import static Util.Consultas.*;
 
 public class main {
     public static long start = 0, stop = 0;
@@ -109,7 +108,7 @@ public class main {
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicio:");
-                    SimpleDateFormat formato2 = new SimpleDateFormat("dd-MM-yyyy");
+                    SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
                     String input1 = reader.next();
                     System.out.println("Ingrese la fecha de finalización:");
                     String input2 = reader.next();
@@ -125,6 +124,8 @@ public class main {
                             Consulta3(inicio,finalizacion);
                         } catch (ParseException e) {
                             e.printStackTrace();
+                        } catch (KeyNotFound e) {
+                            e.printStackTrace();
                         }
                     }else{
                         System.out.println("Error introduzca las fechas con formato: dd/MM/yyyy ");
@@ -133,6 +134,7 @@ public class main {
                     break;
                 case 4:
                     //Consulta4
+                    Consulta4();
                     break;
                 case 5:
                     //Consulta5

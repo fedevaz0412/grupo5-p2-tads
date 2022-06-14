@@ -11,11 +11,11 @@ import uy.edu.um.prog2.adt.heap.HeapNode;
 import uy.edu.um.prog2.adt.heap.exceptions.EmptyHeapException;
 import uy.edu.um.prog2.adt.heap.exceptions.FullHeap;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-import static Util.CargaDatos.breweryHash;
-import static Util.CargaDatos.reviewHash;
+import static Util.CargaDatos.*;
 import static Util.Conversores.convertToLocalDateTimeViaInstant;
 
 public class Consultas {
@@ -76,9 +76,33 @@ public class Consultas {
         System.out.println("Consulta 1 finalizada");
     }
 
-    public static void Consulta3(Date inicio, Date finalizacion){
+    public static void Consulta3(Date inicio, Date finalizacion) throws KeyNotFound {
         System.out.println("estoy en consulta 3");
-        System.out.println(inicio);
-        System.out.println(finalizacion);
+        int count = 0;
+
+        ListaArray<Long> idsRev = reviewHash.getArraylistKeys();
+        for (int i = 0; i< idsRev.size();i++){
+            Long idRevCurrent = idsRev.get(i);
+            Review currentRev = reviewHash.get(idRevCurrent);
+            if (currentRev.getDate().compareTo(inicio) > 0 && currentRev.getDate().compareTo(finalizacion) < 0){//está después de inicio y antes de finalización
+                count++;
+            }else if(currentRev.getDate().compareTo(inicio) == 0 || currentRev.getDate().compareTo(finalizacion) == 0){
+                count++;
+            }
+        }
+
+        System.out.println("Cantidad de reviews entre las fechas dadas: " + count);
+        System.out.println("Consulta 3 finalizada");
+
+
+    }
+
+    public static void Consulta4() {
+        System.out.println("estoy en consulta 4");
+
+        System.out.println(styleHash.size());
+
+
+        System.out.println("Consulta 4 finalizada");
     }
 }
