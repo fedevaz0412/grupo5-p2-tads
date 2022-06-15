@@ -58,7 +58,7 @@ public class Consultas {
         }
         for (int z = 0; z < 10; z++) {
             try {HeapNode<Integer,Brewery> actual = heapTopReviews.delete();
-                System.out.println("Brewery ID: " + actual.getData().getId() + "\n"
+                System.out.println((z+1) + ") " + "Brewery ID: " + actual.getData().getId() + "\n"
                         + "Brewery name: " + actual.getData().getName() + "\n"
                         + "Cantidad de reviews: " + actual.getKey() + "\r\n");
             }
@@ -95,7 +95,7 @@ public class Consultas {
         }
         for (int z = 0; z < 15; z++) {
             try {HeapNode<Integer,User> actual = heapTopReviews.delete();
-                System.out.println("User: " + actual.getData().getUsername() + "\n"
+                System.out.println((z+1) + ") " + "User: " + actual.getData().getUsername() + "\n"
                         + "Cantidad de reviews: " + actual.getKey() + "\r\n");
             }
             catch(EmptyHeapException E) {
@@ -160,7 +160,7 @@ public class Consultas {
 
         for (int z = 0; z < 7; z++) {
             try {HeapNode<Double,Style> actual = heapTop.delete();
-                System.out.println("Style: " + actual.getData().getName() + "\n"
+                System.out.println((z+1) + ") " + "Style: " + actual.getData().getName() + "\n"
                         + "Puntuación: " + actual.getKey() + "\r\n");
             }
             catch(EmptyHeapException E) {

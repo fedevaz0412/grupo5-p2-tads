@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import static Util.CargaDatos.Cargar;
 import static Util.Consultas.*;
+import static Util.Conversores.msAs;
 
 public class main {
     public static long start = 0, stop = 0;
@@ -37,8 +38,7 @@ public class main {
                         stop = System.currentTimeMillis();
 
                         cargaDatos = true;
-
-                        System.out.println("Carga de datos exitosa, tiempo de ejecución de la carga: " + (stop - start) + "ms." + "\r\n");
+                        System.out.println("Carga de datos exitosa, tiempo de ejecución de la carga: " + (msAs(stop-start)) + "s." + "\r\n");
                     }
                     else{
                         System.out.println("Los datos ya fueron cargados");
@@ -86,7 +86,10 @@ public class main {
                     if (isDate) {
                         try {
                             Date year = formato.parse(input);//en año queda el año con formato Date
+                            start = System.currentTimeMillis();
                             Consulta1(year);
+                            stop = System.currentTimeMillis();
+                            System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                         } catch (ParseException | EmptyHeapException | FullHeap | UnavailableIndex | KeyNotFound e) {
                             e.printStackTrace();
                         }
@@ -96,7 +99,10 @@ public class main {
 
                     break;
                 case 2:
+                    start = System.currentTimeMillis();
                     Consulta2();
+                    stop = System.currentTimeMillis();
+                    System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                     break;
                 case 3:
                     SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
@@ -113,7 +119,10 @@ public class main {
                         try {
                             Date inicio = formato2.parse(input1);//queda con formato Date
                             Date finalizacion = formato2.parse(input2);//queda con formato Date
+                            start = System.currentTimeMillis();
                             Consulta3(inicio,finalizacion);
+                            stop = System.currentTimeMillis();
+                            System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -123,7 +132,10 @@ public class main {
 
                     break;
                 case 4:
+                    start = System.currentTimeMillis();
                     Consulta4();
+                    stop = System.currentTimeMillis();
+                    System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                     break;
                 case 5:
                     //Consulta5
