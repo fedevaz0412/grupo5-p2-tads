@@ -67,7 +67,7 @@ public class main {
         boolean menu2 = true;
         while(menu2) {
             System.out.println("1. Listar las 10 casas de cerveza (breweries) con más reseñas en un año."
-                    + "\r\n" + "2. Top 15 catadores con más reseñas. Este listado deberá incluir el nombre de usuario, y la cantidad de reseñas de cada uno, ordenado por cantidad de reseñas en orden descendente."
+                    + "\r\n" + "2. Top 15 catadores con más reseñas."
                     + "\r\n" + "3. Cantidad de reviews en un rango dado."
                     + "\r\n" + "4. Top 7 estilos de cervezas con mejor aroma."
                     + "\r\n" + "5. Top 5 cervezas con más reviews."

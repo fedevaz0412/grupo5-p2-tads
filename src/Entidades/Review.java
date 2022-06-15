@@ -14,9 +14,10 @@ public class Review {
     private long beerId;
     private long breweryId;
     private String userId;
+    private String beerStyle;
 
     //Constructor
-    public Review(long id, Date date, double overallScore, double aromaScore, double appearanceScore, double flavourScore, long beerId, long breweryId, String userId) {
+    public Review(long id, Date date, double overallScore, double aromaScore, double appearanceScore, double flavourScore, long beerId, long breweryId, String userId, String beerStyle) {
         this.id = id;
         this.date = date;
         this.overallScore = overallScore;
@@ -26,7 +27,7 @@ public class Review {
         this.beerId = beerId;
         this.breweryId = breweryId;
         this.userId = userId;
-
+        this.beerStyle = beerStyle;
     }
     //Getters
     public long getId() {
@@ -57,9 +58,9 @@ public class Review {
 
     public long getBreweryId() { return breweryId; }
 
-    public String getUserId() {
-        return userId;
-    }
+    public String getUserId() { return userId; }
 
-    }
+    public String getBeerStyle() { return beerStyle; }
+
+}
 

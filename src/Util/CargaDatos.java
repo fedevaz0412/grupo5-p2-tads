@@ -43,7 +43,7 @@ public class CargaDatos {
                 Review nuevaReview = new Review(stringALong(atributos[0]),review_date,
                         stringADouble(atributos[4]),stringADouble(atributos[5]),
                         stringADouble(atributos[6]),stringADouble(atributos[10]), //se toma review_taste como flavour
-                        stringALong(atributos[13]),stringALong(atributos[1]), atributos[7]);
+                        stringALong(atributos[13]),stringALong(atributos[1]), atributos[7], atributos[8]);
                 Brewery nuevaBrewery = new Brewery(stringALong(atributos[1]),atributos[2]);
                 Style nuevoStyle = new Style(atributos[8]);
 
