@@ -1,9 +1,6 @@
 package Util;
 
-import Entidades.Brewery;
-import Entidades.Review;
-import Entidades.Style;
-import Entidades.User;
+import Entidades.*;
 import uy.edu.um.prog2.adt.arraylist.ListaArray;
 import uy.edu.um.prog2.adt.hash.MyClosedHashImpl;
 import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
@@ -134,8 +131,10 @@ public class Consultas {
         for (int i = 0; i< idsReviews.size();i++) {
             Long idRevCurrent = idsReviews.get(i);
             Review currentRev = reviewHash.get(idRevCurrent);
-            String currentRevStyle = currentRev.getBeerStyle();
-            Style currentStyle = styleHash.get(currentRevStyle);
+            long currentRevBeer = currentRev.getBeerId();
+            Beer currentBeer = beerHash.get(currentRevBeer);
+            String currentBeerStyle = currentBeer.getStyle();
+            Style currentStyle = styleHash.get(currentBeerStyle);
             double sumaCU = currentStyle.getSuma();
             double aromaScoreCurrent = currentRev.getAromaScore();
             sumaCU = sumaCU + aromaScoreCurrent;

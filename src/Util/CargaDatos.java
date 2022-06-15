@@ -37,13 +37,13 @@ public class CargaDatos {
             while (line != null) {
                 String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 //CREAR ENTIDADES EN BASE A LA LÍNEA
-                Beer nuevaBeer = new Beer(stringALong(atributos[13]), atributos[11], stringADouble(atributos[12]), stringALong(atributos[1]));
+                Beer nuevaBeer = new Beer(stringALong(atributos[13]), atributos[11], stringADouble(atributos[12]), stringALong(atributos[1]), atributos[8]);
                 User nuevoUser = new User(atributos[7]);
                 Date review_date = epochToDate(atributos[3]);
                 Review nuevaReview = new Review(stringALong(atributos[0]),review_date,
                         stringADouble(atributos[4]),stringADouble(atributos[5]),
                         stringADouble(atributos[6]),stringADouble(atributos[10]), //se toma review_taste como flavour
-                        stringALong(atributos[13]),stringALong(atributos[1]), atributos[7], atributos[8]);
+                        stringALong(atributos[13]),stringALong(atributos[1]), atributos[7]);
                 Brewery nuevaBrewery = new Brewery(stringALong(atributos[1]),atributos[2]);
                 Style nuevoStyle = new Style(atributos[8]);
 
