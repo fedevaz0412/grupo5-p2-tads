@@ -33,17 +33,4 @@ public class Beer {
 
     public long getIdBrewery() { return idBrewery; }
 
-    public float getOverallScore(int cant) throws KeyNotFound {
-        ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
-        float sumaOverall = 0;
-        for(int j=0; j<idsReviews.size(); j++) {
-            Long revId = idsReviews.get(j);
-            Review review = reviewHash.get(revId);
-            if (this.getId() == review.getBeerId()) {
-                sumaOverall += review.getOverallScore();
-            }
-        }
-        float overallAvg = sumaOverall/cant;
-        return sumaOverall;
-    }
 }
