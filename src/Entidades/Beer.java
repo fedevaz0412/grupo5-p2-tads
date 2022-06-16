@@ -36,4 +36,22 @@ public class Beer {
     public long getIdBrewery() { return idBrewery; }
 
     public String getStyle() { return style; }
+    
+    public float getReviewPromedio(int cant) throws KeyNotFound {
+        ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
+        float sumaOverall = 0;
+        float cantidadReviews = 0; 
+        for(int j=0; j<idsReviews.size(); j++) {
+            Long revId = idsReviews.get(j);
+            Review review = reviewHash.get(revId);
+            if (this.getId() == review.getBeerId()) {
+                sumaOverall += review.getOverallScore();
+            }
+            if (this.getId() == reviewHash.get(revId)){
+                cantidadReviews++
+            }
+        }
+        float overallAvg = sumaOverall/cantidadReviews;
+        return overallAvg;
+    }
 }
