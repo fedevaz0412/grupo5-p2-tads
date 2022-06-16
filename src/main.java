@@ -57,7 +57,7 @@ public class main {
                     menu = false;
                     break;
                 default:
-                    System.out.println("Opción inválida" + "\r\n");
+                    System.out.println("Opcion invalida" + "\r\n");
 
             }
 
@@ -67,8 +67,8 @@ public class main {
         Scanner reader = new Scanner(System.in);
         boolean menu2 = true;
         while(menu2) {
-            System.out.println("1. Listar las 10 casas de cerveza (breweries) con más reseñas en un año."
-                    + "\r\n" + "2. Top 15 catadores con más reseñas."
+            System.out.println("1. Listar las 10 casas de cerveza (breweries) con mas resenas en un ano."
+                    + "\r\n" + "2. Top 15 catadores con mas resenas."
                     + "\r\n" + "3. Cantidad de reviews en un rango dado."
                     + "\r\n" + "4. Top 7 estilos de cervezas con mejor aroma."
                     + "\r\n" + "5. Top 5 cervezas con más reviews."
