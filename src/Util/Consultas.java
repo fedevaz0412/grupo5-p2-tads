@@ -1,8 +1,6 @@
 package Util;
 
-import Entidades.Brewery;
-import Entidades.Review;
-import Entidades.User;
+import Entidades.*;
 import uy.edu.um.prog2.adt.arraylist.ListaArray;
 import uy.edu.um.prog2.adt.hash.MyClosedHashImpl;
 import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
@@ -63,7 +61,7 @@ public class Consultas {
         }
         for (int z = 0; z < 10; z++) {
             try {HeapNode<Integer,Brewery> actual = heapTopReviews.delete();
-                System.out.println("Brewery ID: " + actual.getData().getId() + "\n"
+                System.out.println((z+1) + ") " + "Brewery ID: " + actual.getData().getId() + "\n"
                         + "Brewery name: " + actual.getData().getName() + "\n"
                         + "Cantidad de reviews: " + actual.getKey() + "\r\n");
             }
@@ -100,7 +98,7 @@ public class Consultas {
         }
         for (int z = 0; z < 15; z++) {
             try {HeapNode<Integer,User> actual = heapTopReviews.delete();
-                System.out.println("User: " + actual.getData().getUsername() + "\n"
+                System.out.println((z+1) + ") " + "User: " + actual.getData().getUsername() + "\n"
                         + "Cantidad de reviews: " + actual.getKey() + "\r\n");
             }
             catch(EmptyHeapException E) {
@@ -133,11 +131,47 @@ public class Consultas {
 
     }
 
-    public static void Consulta4() {
-        System.out.println("estoy en consulta 4");
+    public static void Consulta4() throws KeyNotFound, UnavailableIndex, FullHeap {
+        ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
+        MyClosedHashImpl<String, Style> hashCons4 = new MyClosedHashImpl<>(1600000);
+        for (int i = 0; i< idsReviews.size();i++) {
+            Long idRevCurrent = idsReviews.get(i);
+            Review currentRev = reviewHash.get(idRevCurrent);
+            long currentRevBeer = currentRev.getBeerId();
+            Beer currentBeer = beerHash.get(currentRevBeer);
+            String currentBeerStyle = currentBeer.getStyle();
+            Style currentStyle = styleHash.get(currentBeerStyle);
+            double sumaCU = currentStyle.getSuma();
+            double aromaScoreCurrent = currentRev.getAromaScore();
+            sumaCU = sumaCU + aromaScoreCurrent;
+            currentStyle.setSuma(sumaCU);
+            int countCU = currentStyle.getCount();
+            countCU++;
+            currentStyle.setCount(countCU);
+            hashCons4.put(currentStyle.getName(),currentStyle);
+        }
 
-        System.out.println(styleHash.size());
+        ListaArray<String> idsHashCons4 = hashCons4.getArraylistKeys();
+        HeapImpl<Double, Style> heapTop = new HeapImpl<>(hashCons4.size()*2);
+        for (int i = 0; i<idsHashCons4.size();i++){
+            String idStyleCurrent = idsHashCons4.get(i);
+            Style styleCurrent = hashCons4.get(idStyleCurrent);
+            double sumaCU = styleCurrent.getSuma();
+            int countCU = styleCurrent.getCount();
+            double promedio = sumaCU/countCU;//ver si hay que mostrar solo tamtas cifras dsp de la coma
+            heapTop.insertMaxHeap(promedio,styleCurrent);
+        }
 
+        for (int z = 0; z < 7; z++) {
+            try {HeapNode<Double,Style> actual = heapTop.delete();
+                System.out.println((z+1) + ") " + "Style: " + actual.getData().getName() + "\n"
+                        + "Puntuación: " + actual.getKey() + "\r\n");
+            }
+            catch(EmptyHeapException E) {
+                System.out.println("ERROR, no hay puntaje");
+                break;
+            }
+        }
 
         System.out.println("Consulta 4 finalizada");
     }

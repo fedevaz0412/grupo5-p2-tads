@@ -45,4 +45,9 @@ public class Conversores {
         }
         return l;
     }
+
+    public static Double msAs (long milis){
+        double seg = milis/1000.0;
+        return seg;
+    }
 }

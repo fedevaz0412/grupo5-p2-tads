@@ -37,7 +37,7 @@ public class CargaDatos {
             while (line != null) {
                 String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 //CREAR ENTIDADES EN BASE A LA LÍNEA
-                Beer nuevaBeer = new Beer(stringALong(atributos[13]), atributos[11], stringADouble(atributos[12]), stringALong(atributos[1]));
+                Beer nuevaBeer = new Beer(stringALong(atributos[13]), atributos[11], stringADouble(atributos[12]), stringALong(atributos[1]), atributos[8]);
                 User nuevoUser = new User(atributos[7]);
                 Date review_date = epochToDate(atributos[3]);
                 Review nuevaReview = new Review(stringALong(atributos[0]),review_date,

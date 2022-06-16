@@ -9,9 +9,8 @@ import java.util.Date;
 import java.util.Scanner;
 
 import static Util.CargaDatos.Cargar;
-import static Util.Consultas.Consulta1;
-import static Util.Consultas.Consulta2;
-import static Util.Consultas.Consulta3;
+import static Util.Consultas.*;
+import static Util.Conversores.msAs;
 
 public class main {
     public static long start = 0, stop = 0;
@@ -40,7 +39,7 @@ public class main {
 
                         cargaDatos = true;
 
-                        System.out.println("Carga de datos exitosa, tiempo de ejecución de la carga: " + (stop - start) + "ms." + "\r\n");
+                        System.out.println("Carga de datos exitosa, tiempo de ejecución de la carga: " + msAs(stop - start) + "s." + "\r\n");
                     }
                     else{
                         System.out.println("Los datos ya fueron cargados");
@@ -69,7 +68,7 @@ public class main {
         boolean menu2 = true;
         while(menu2) {
             System.out.println("1. Listar las 10 casas de cerveza (breweries) con más reseñas en un año."
-                    + "\r\n" + "2. Top 15 catadores con más reseñas. Este listado deberá incluir el nombre de usuario, y la cantidad de reseñas de cada uno, ordenado por cantidad de reseñas en orden descendente."
+                    + "\r\n" + "2. Top 15 catadores con más reseñas."
                     + "\r\n" + "3. Cantidad de reviews en un rango dado."
                     + "\r\n" + "4. Top 7 estilos de cervezas con mejor aroma."
                     + "\r\n" + "5. Top 5 cervezas con más reviews."
@@ -89,15 +88,7 @@ public class main {
                         try {
                             Date year = formato.parse(input);//en año queda el año con formato Date
                             Consulta1(year);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        } catch (KeyNotFound e) {
-                            e.printStackTrace();
-                        } catch (UnavailableIndex e) {
-                            e.printStackTrace();
-                        } catch (FullHeap e) {
-                            e.printStackTrace();
-                        } catch (EmptyHeapException e) {
+                        } catch (ParseException | KeyNotFound | UnavailableIndex | FullHeap | EmptyHeapException e) {
                             e.printStackTrace();
                         }
                     }else{
@@ -106,7 +97,10 @@ public class main {
 
                     break;
                 case 2:
+                    start = System.currentTimeMillis();
                     Consulta2();
+                    stop = System.currentTimeMillis();
+                    System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                     break;
                 case 3:
                     System.out.println("Ingrese la fecha de inicioen formato dd/MM/yyyy:");
@@ -123,7 +117,10 @@ public class main {
                         try {
                             Date inicio = formato2.parse(input1);//queda con formato Date
                             Date finalizacion = formato2.parse(input2);//queda con formato Date
+                            start = System.currentTimeMillis();
                             Consulta3(inicio,finalizacion);
+                            stop = System.currentTimeMillis();
+                            System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -133,7 +130,10 @@ public class main {
 
                     break;
                 case 4:
-                    //Consulta4
+                    start = System.currentTimeMillis();
+                    Consulta4();
+                    stop = System.currentTimeMillis();
+                    System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                     break;
                 case 5:
                     //Consulta5
