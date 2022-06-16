@@ -3,6 +3,7 @@ package Util;
 import Entidades.Brewery;
 import Entidades.Review;
 import Entidades.User;
+import Entidades.Beer;
 import uy.edu.um.prog2.adt.arraylist.ListaArray;
 import uy.edu.um.prog2.adt.hash.MyClosedHashImpl;
 import uy.edu.um.prog2.adt.hash.exceptions.KeyNotFound;
@@ -141,4 +142,47 @@ public class Consultas {
 
         System.out.println("Consulta 4 finalizada");
     }
+
+    public static void Consulta5() throws KeyNotFound, UnavailableIndex, FullHeap {
+        ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
+        MyClosedHashImpl<Long, Integer> hashCons5 = new MyClosedHashImpl<>(1600000);//hash cervezas, cant de reviews de cerveza y su promedio
+        for (int i = 0; i<idsReviews.size();i++){
+            Long revIdCurrent = idsReviews.get(i);
+            Review revCurrent = reviewHash.get(revIdCurrent);
+            long beerIdCurrent = revCurrent.getBeerId();
+            if (hashCons5.contains(beerIdCurrent)){
+                int count = hashCons5.get(beerIdCurrent);
+                hashCons5.put(beerIdCurrent,(count+1));
+            }else{
+                hashCons5.put(beerIdCurrent,1);
+            }
+        }
+
+        ListaArray<Long> beerHashCons5 = hashCons5.getArraylistKeys();
+        HeapImpl<Integer, Beer> heapTopReviews = new HeapImpl<>(hashCons5.size()*2);
+        for (int i = 0; i< beerHashCons5.size();i++){
+            Long beerIdCurrent = beerHashCons5.get(i);
+            int cant = hashCons5.get(beerIdCurrent);
+
+            Beer beerCurrent = beerHash.get(beerIdCurrent);
+            heapTopReviews.insertMaxHeap(cant,beerCurrent);
+        }
+
+        for (int z = 0; z < 5; z++) {
+            try {HeapNode<Integer,Beer> actual = heapTopReviews.delete();
+                System.out.println("Beer: " + actual.getData().getName() + "\n"
+                        + "Cantidad de reviews: " + actual.getKey() + "\r\n"
+                        + "AVG reviews: " + actual.getData().getOverallScore(cant));
+            }
+            catch(EmptyHeapException E) {
+                System.out.println("ERROR, no hay reseñas");
+                break;
+            }
+        }
+
+        System.out.println("Consulta 5 finalizada");
+    }
+
+
+}
 }
