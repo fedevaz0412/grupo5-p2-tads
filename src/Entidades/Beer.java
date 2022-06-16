@@ -47,7 +47,7 @@ public class Beer {
             if (this.getId() == review.getBeerId()) {
                 sumaOverall += review.getOverallScore();
             }
-            if (this.getId() == reviewHash.get(revId)){
+            if (review.getId() == reviewHash.get(revId)){
                 cantidadReviews++
             }
         }
