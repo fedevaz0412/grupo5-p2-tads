@@ -37,7 +37,7 @@ public class Beer {
 
     public String getStyle() { return style; }
     
-    public float getReviewPromedio(int cant) throws KeyNotFound {
+    public float getReviewPromedio() throws KeyNotFound {
         ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
         float sumaOverall = 0;
         float cantidadReviews = 0; 
@@ -46,9 +46,7 @@ public class Beer {
             Review review = reviewHash.get(revId);
             if (this.getId() == review.getBeerId()) {
                 sumaOverall += review.getOverallScore();
-            }
-            if (review.getId() == reviewHash.get(revId)){
-                cantidadReviews++
+                cantidadReviews++;
             }
         }
         float overallAvg = sumaOverall/cantidadReviews;

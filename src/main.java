@@ -136,7 +136,10 @@ public class main {
                     System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                     break;
                 case 5:
-                    //Consulta5
+                    start = System.currentTimeMillis();
+                    Consulta5();
+                    stop = System.currentTimeMillis();
+                    System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                     break;
                 case 6:
                     menu2 = false;
