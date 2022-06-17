@@ -29,7 +29,7 @@ public class CargaDatos {
     public static MyClosedHashImpl<String, Style> styleHash = new MyClosedHashImpl<>(1600000);
 
     public static void Cargar() {
-        String filename = "beer_dataset_test.csv";
+        String filename = "beer_dataset_test.csv";//Para cargar los datos es necesario poner el nombre del archivo y que este esté en la raíz del proyecto
         Path pathToFile1 = Paths.get(filename);
         try (BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
             String line = reader.readLine();
