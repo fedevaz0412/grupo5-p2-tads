@@ -106,7 +106,7 @@ public class main {
                     System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                     break;
                 case 3:
-                    System.out.println("Ingrese la fecha de inicioen formato dd/MM/yyyy:");
+                    System.out.println("Ingrese la fecha de inicio en formato dd/MM/yyyy:");
                     SimpleDateFormat formato2 = new SimpleDateFormat("dd/MM/yyyy");
                     String input1 = reader.next();
                     System.out.println("Ingrese la fecha de finalización:");

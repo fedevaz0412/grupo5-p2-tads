@@ -204,7 +204,7 @@ public class Consultas {
             try {HeapNode<Integer,Beer> actual = heapTopReviews.delete();
                 System.out.println((z+1) + ") " + "Beer: " + actual.getData().getName() + "\n"
                         + "Cantidad de reviews: " + actual.getKey() + "\n"
-                        + "AVG reviews: " + String.format("%.2f",actual.getData().getReviewPromedio()) + "\r\n");
+                        + "AVG score: " + String.format("%.2f",actual.getData().getReviewPromedio()) + "\r\n");
             }
             catch(EmptyHeapException E) {
                 System.out.println("ERROR, no hay reseñas");
