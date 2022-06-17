@@ -87,7 +87,10 @@ public class main {
                     if (isDate) {
                         try {
                             Date year = formato.parse(input);//en año queda el año con formato Date
+                            start = System.currentTimeMillis();
                             Consulta1(year);
+                            stop = System.currentTimeMillis();
+                            System.out.println("Tiempo de ejecución: " + (msAs(stop-start)) + "s." + "\r\n");
                         } catch (ParseException | KeyNotFound | UnavailableIndex | FullHeap | EmptyHeapException e) {
                             e.printStackTrace();
                         }
