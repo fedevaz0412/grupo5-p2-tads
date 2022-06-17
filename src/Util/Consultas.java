@@ -165,7 +165,7 @@ public class Consultas {
         for (int z = 0; z < 7; z++) {
             try {HeapNode<Double,Style> actual = heapTop.delete();
                 System.out.println((z+1) + ") " + "Style: " + actual.getData().getName() + "\n"
-                        + "Puntuación: " + actual.getKey() + "\r\n");
+                        + "Puntuación: " + String.format("%.2f",actual.getKey()) + "\r\n");
             }
             catch(EmptyHeapException E) {
                 System.out.println("ERROR, no hay puntaje");
