@@ -158,7 +158,7 @@ public class Consultas {
             Style styleCurrent = hashCons4.get(idStyleCurrent);
             double sumaCU = styleCurrent.getSuma();
             int countCU = styleCurrent.getCount();
-            double promedio = sumaCU/countCU;//ver si hay que mostrar solo tamtas cifras dsp de la coma
+            double promedio = sumaCU/countCU;
             heapTop.insertMaxHeap(promedio,styleCurrent);
         }
 
@@ -177,7 +177,7 @@ public class Consultas {
     }
     public static void Consulta5() throws KeyNotFound, UnavailableIndex, FullHeap {
         ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
-        MyClosedHashImpl<Long, Integer> hashCons5 = new MyClosedHashImpl<>(1600000);//hash cervezas, cant de reviews de cerveza y su promedio
+        MyClosedHashImpl<Long, Integer> hashCons5 = new MyClosedHashImpl<>(1600000);//hash cervezas, cant de reviews de cerveza 
         for (int i = 0; i<idsReviews.size();i++){
             Long revIdCurrent = idsReviews.get(i);
             Review revCurrent = reviewHash.get(revIdCurrent);
