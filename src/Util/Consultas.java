@@ -133,7 +133,7 @@ public class Consultas {
 
     public static void Consulta4() throws KeyNotFound, UnavailableIndex, FullHeap {
         ListaArray<Long> idsReviews = reviewHash.getArraylistKeys();
-        MyClosedHashImpl<String, Style> hashCons4 = new MyClosedHashImpl<>(1600000);
+        MyClosedHashImpl<String, Style> hashCons4 = new MyClosedHashImpl<>(1600000);//Hash con el nombre del estilo y el objeto Style
         for (int i = 0; i< idsReviews.size();i++) {
             Long idRevCurrent = idsReviews.get(i);
             Review currentRev = reviewHash.get(idRevCurrent);
