@@ -29,23 +29,14 @@ public class CargaDatos {
     public static MyClosedHashImpl<String, Style> styleHash = new MyClosedHashImpl<>(1600000);
 
     public static void Cargar() {
-        String filename = "beer_dataset_test.csv";//Para cargar los datos es necesario poner el nombre del archivo y que este esté en la raíz del proyecto
+        String filename = "beer_dataset_full.csv";//Para cargar los datos es necesario poner el nombre del archivo y que este esté en la raíz del proyecto
         Path pathToFile1 = Paths.get(filename);
         try (BufferedReader reader = Files.newBufferedReader(pathToFile1, StandardCharsets.UTF_8)) {
-            String line = reader.readLine();
+            String line;
             line = reader.readLine();
             while (line != null) {
                 String[] atributos = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                //CREAR ENTIDADES EN BASE A LA LÍNEA
-                Beer nuevaBeer = new Beer(stringALong(atributos[13]), atributos[11], stringADouble(atributos[12]), stringALong(atributos[1]), atributos[8]);
-                User nuevoUser = new User(atributos[7]);
-                Date review_date = epochToDate(atributos[3]);
-                Review nuevaReview = new Review(stringALong(atributos[0]),review_date,
-                        stringADouble(atributos[4]),stringADouble(atributos[5]),
-                        stringADouble(atributos[6]),stringADouble(atributos[10]), //se toma review_taste como flavour
-                        stringALong(atributos[13]),stringALong(atributos[1]), atributos[7]);
-                Brewery nuevaBrewery = new Brewery(stringALong(atributos[1]),atributos[2]);
-                Style nuevoStyle = new Style(atributos[8]);
+
 
                 //PONER NUEVOS EN SUS RESPECTIVOS TADS
                 try {
@@ -57,6 +48,16 @@ public class CargaDatos {
                             && !Objects.equals(atributos[8], "") && !Objects.equals(atributos[9], "")
                             && !Objects.equals(atributos[10], "") && !Objects.equals(atributos[11], "")
                             && !Objects.equals(atributos[12], "") && !Objects.equals(atributos[13], "") ) {
+                        //CREAR ENTIDADES EN BASE A LA LÍNEA
+                        Beer nuevaBeer = new Beer(stringALong(atributos[13]), atributos[11], stringADouble(atributos[12]), stringALong(atributos[1]), atributos[8]);
+                        User nuevoUser = new User(atributos[7]);
+                        Date review_date = epochToDate(atributos[3]);
+                        Review nuevaReview = new Review(stringALong(atributos[0]),review_date,
+                                stringADouble(atributos[4]),stringADouble(atributos[5]),
+                                stringADouble(atributos[6]),stringADouble(atributos[10]), //se toma review_taste como flavour
+                                stringALong(atributos[13]),stringALong(atributos[1]), atributos[7]);
+                        Brewery nuevaBrewery = new Brewery(stringALong(atributos[1]),atributos[2]);
+                        Style nuevoStyle = new Style(atributos[8]);
 
                         //BEER
                         if (!beerHash.contains(nuevaBeer.getId())) {
