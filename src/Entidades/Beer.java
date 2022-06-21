@@ -10,14 +10,14 @@ public class Beer {
     private long id;
     private String name;
     private double abv;
-    private long idBrewery;
+//    private long idBrewery;
     private String style;
     //Constructor
-    public Beer(long id, String name, double abv, long idBrewery, String style) {
+    public Beer(long id, String name, double abv, String style) {
         this.id = id;
         this.name = name;
         this.abv = abv;
-        this.idBrewery = idBrewery;
+//        this.idBrewery = idBrewery;
         this.style = style;
     }
     //Getters
@@ -33,7 +33,7 @@ public class Beer {
         return abv;
     }
 
-    public long getIdBrewery() { return idBrewery; }
+//    public long getIdBrewery() { return idBrewery; }
 
     public String getStyle() { return style; }
     
